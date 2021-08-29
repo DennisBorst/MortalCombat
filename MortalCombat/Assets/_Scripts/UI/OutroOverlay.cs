@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using ToolBox;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MortalCombat
 {
@@ -18,11 +19,21 @@ namespace MortalCombat
             gameObject.SetActive(false);
         }
 
+        private void OnDestroy()
+        {
+            GlobalEvents.RemoveListener<PlayerWinMessage>(OnPlayerWin);
+        }
+
         private void OnPlayerWin(PlayerWinMessage obj)
         {
             gameObject.SetActive(true);
             text.text = string.Format(format, obj.playerId + 1);
             animator.SetTrigger("start");
+        }
+
+        public void GoToMainMenu()
+        {
+            SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
         }
     }
 }
