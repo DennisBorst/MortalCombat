@@ -23,8 +23,9 @@ namespace MortalCombat
 
         private void Awake()
         {
-            if (Instance)
+            if (Instance != null) { 
                 Destroy(this);
+            }
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
