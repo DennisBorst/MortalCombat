@@ -136,7 +136,6 @@ namespace MortalCombat
 
             ConfigureControlButtons();
             if (m_InputAvaible) { CheckInput(); }
-            else { Move(0f, false); }
         }
 
         private void CheckInput()
