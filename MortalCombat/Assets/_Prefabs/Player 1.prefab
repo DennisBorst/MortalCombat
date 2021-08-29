@@ -202,7 +202,7 @@ MonoBehaviour:
   OnLandEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_InputAvaible: 1
+  m_InputAvaible: 0
 --- !u!114 &6623008891668711587
 MonoBehaviour:
   m_ObjectHideFlags: 0
