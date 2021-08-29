@@ -44,7 +44,8 @@ namespace MortalCombat
         [SerializeField] private bool m_InputAvaible;
 
         private KeyCode jump;
-        private KeyCode lightAttack;
+        private KeyCode meleeAttack;
+        private KeyCode rangedAttack;
 
         private void Awake()
         {
@@ -84,16 +85,19 @@ namespace MortalCombat
             switch (m_ControllerID)
             {
                 case 0:
-                    lightAttack = KeyCode.Joystick1Button1;
                     jump = KeyCode.Joystick1Button0;
+                    meleeAttack = KeyCode.Joystick1Button1;
+                    rangedAttack = KeyCode.Joystick1Button2;
                     break;
                 case 1:
-                    lightAttack = KeyCode.Joystick2Button1;
                     jump = KeyCode.Joystick2Button0;
+                    meleeAttack = KeyCode.Joystick2Button1;
+                    rangedAttack = KeyCode.Joystick2Button2;
                     break;
                 default:
-                    lightAttack = KeyCode.X;
                     jump = KeyCode.Space;
+                    meleeAttack = KeyCode.X;
+                    rangedAttack = KeyCode.C;
                     break;
             }
         }
@@ -132,6 +136,7 @@ namespace MortalCombat
 
             ConfigureControlButtons();
             if (m_InputAvaible) { CheckInput(); }
+            else { Move(0f, false); }
         }
 
         private void CheckInput()
@@ -140,9 +145,13 @@ namespace MortalCombat
             {
                 Move(m_hInput, true);
             }
-            if (Input.GetKeyDown(lightAttack))
+            if (Input.GetKeyDown(meleeAttack))
             {
                 AnimState(3, true);
+            }
+            if (Input.GetKeyDown(rangedAttack))
+            {
+
             }
         }
 
