@@ -78,7 +78,7 @@ MonoBehaviour:
   OnLandEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_InputAvaible: 1
+  m_InputAvaible: 0
 --- !u!114 &6623008891668711587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,6 +206,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4598528201690325257}
     m_Modifications:
+    - target: {fileID: 458537432050571050, guid: 2f8e777c82e29c64bbfeeeff6b10af3a, type: 3}
+      propertyPath: m_Force
+      value: 6000
+      objectReference: {fileID: 0}
+    - target: {fileID: 458537432050571050, guid: 2f8e777c82e29c64bbfeeeff6b10af3a, type: 3}
+      propertyPath: hitParticle
+      value: 
+      objectReference: {fileID: 3462761218687308064, guid: ba67bbe1d553e2f438b83e9287e814ff, type: 3}
     - target: {fileID: 1196878196405511290, guid: 2f8e777c82e29c64bbfeeeff6b10af3a, type: 3}
       propertyPath: m_RootOrder
       value: 0

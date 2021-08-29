@@ -75,7 +75,7 @@ namespace MortalCombat
         private void OnGameStart(GameStartMessage obj)
         {
             m_InputAvaible = true;
-            GlobalEvents.RemoveListener<GameStartMessage>(OnGameStart);
+            //GlobalEvents.RemoveListener<GameStartMessage>(OnGameStart);
         }
 
         public void ConfigureControlButtons()
