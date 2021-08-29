@@ -27,10 +27,10 @@ namespace MortalCombat
 
             if (Input.GetKeyDown(KeyCode.Keypad1))
                 GlobalEvents.SendMessage(
-                    new PlayerDamagedMessage(0, 10, 100, UnityEngine.Random.Range(0, 100), 100));
+                    new PlayerDamagedMessage(0, UnityEngine.Random.Range(0, 100)));
             if (Input.GetKeyDown(KeyCode.Keypad2))
                 GlobalEvents.SendMessage(
-                    new PlayerDamagedMessage(1, 10, 100, UnityEngine.Random.Range(0, 100), 100));
+                    new PlayerDamagedMessage(1, UnityEngine.Random.Range(0, 100)));
 
         }
     }
