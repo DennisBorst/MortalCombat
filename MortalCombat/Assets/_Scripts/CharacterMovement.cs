@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using ToolBox;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -52,6 +54,28 @@ namespace MortalCombat
             if (OnLandEvent == null)
                 OnLandEvent = new UnityEvent();
 
+
+            GlobalEvents.AddListener<GameStartMessage>(OnGameStart);
+            GlobalEvents.AddListener<PlayerWinMessage>(OnPlayerWin);
+        }
+
+        private void OnDestroy()
+        {
+            GlobalEvents.RemoveListener<GameStartMessage>(OnGameStart);
+            GlobalEvents.RemoveListener<PlayerWinMessage>(OnPlayerWin);
+        }
+
+        private void OnPlayerWin(PlayerWinMessage obj)
+        {
+            m_InputAvaible = false;
+            GlobalEvents.RemoveListener<PlayerWinMessage>(OnPlayerWin);
+        }
+
+
+        private void OnGameStart(GameStartMessage obj)
+        {
+            m_InputAvaible = true;
+            GlobalEvents.RemoveListener<GameStartMessage>(OnGameStart);
         }
 
         public void ConfigureControlButtons()
