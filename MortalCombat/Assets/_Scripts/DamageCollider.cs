@@ -23,9 +23,9 @@ namespace MortalCombat
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.GetComponent<CharacterID>().m_PlayerID == m_CharacterID.m_PlayerID) { return; }
+            if (collision.gameObject.GetComponent<CharacterID>().m_PlayerID == m_CharacterID.m_PlayerID) { return; }
 
-            CharacterHealth health = collision.GetComponent<CharacterHealth>();
+            CharacterHealth health = collision.gameObject.GetComponent<CharacterHealth>();
             if (health != null)
             {
                 health.DamageTaken(m_Damage);
