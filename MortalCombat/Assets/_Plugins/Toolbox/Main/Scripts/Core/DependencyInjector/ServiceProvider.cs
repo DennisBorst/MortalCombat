@@ -1,9 +1,19 @@
 ﻿using System.Collections.Generic;
 using System;
 using ToolBox.Services;
+using UnityEngine;
 
 namespace ToolBox.Injection
 {
+    class ServiceBootstrapper
+    {
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        private static void StartBootstrappedServices()
+        {
+            TypeHelper.GetAllTypesThatInherit<IBootstrapService>();
+        } 
+    }
+
     class ServiceProvider : DependencyInstanceProvider
     {
         private Dictionary<Type, IService> _Cache = new Dictionary<Type, IService>();

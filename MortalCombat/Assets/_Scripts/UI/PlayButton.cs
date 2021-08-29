@@ -12,7 +12,7 @@ namespace MortalCombat
         {
             button.onClick.AddListener(() =>
             {
-                SceneManager.LoadScene("Game", LoadSceneMode.Single);
+                SceneManager.LoadScene("Character Select", LoadSceneMode.Single);
             });
         }
     }

@@ -65,12 +65,17 @@ namespace ToolBox.Injection
         {
             Type type = parameter.ParameterType;
 
-			// If we bound his type to a certain implemention, convert these
+            return FetchInstanceForType(ref type);
+        }
+
+        private object FetchInstanceForType(ref Type type)
+        {
+            // If we bound his type to a certain implemention, convert these
             while (_TypeToTypeBindings.TryGetValue(type, out Type newType))
                 type = newType;
 
             if (DependencyStack.Contains(type))
-	            throw new CyclicDependencyResolvingException(DependencyStack, type);
+                throw new CyclicDependencyResolvingException(DependencyStack, type);
 
             DependencyStack.Push(type);
 
@@ -83,15 +88,15 @@ namespace ToolBox.Injection
                 }
                 else
                 {
-					// This is an invalid entry, might as well remove it.
+                    // This is an invalid entry, might as well remove it.
                     _TypeToInstanceBindings.Remove(type);
                 }
             }
 
-			// Search through the providers to see if any of them can make an instance.
+            // Search through the providers to see if any of them can make an instance.
             for (int i = 0; i < _Providers.Count; i++)
             {
-	            _Providers[i].ProvideInjector(this);
+                _Providers[i].ProvideInjector(this);
                 if (_Providers[i].RequestType(type, out object result))
                 {
                     _TypeToInstanceBindings.Add(type, result);
