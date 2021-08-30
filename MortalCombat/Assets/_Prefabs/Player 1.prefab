@@ -129,7 +129,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.1}
+  m_Offset: {x: 0.05, y: 0.37}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -253,14 +253,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4598528201690325257}
     m_Modifications:
-    - target: {fileID: 458537432050571050, guid: 2f8e777c82e29c64bbfeeeff6b10af3a, type: 3}
-      propertyPath: m_Force
-      value: 6000
-      objectReference: {fileID: 0}
-    - target: {fileID: 458537432050571050, guid: 2f8e777c82e29c64bbfeeeff6b10af3a, type: 3}
-      propertyPath: hitParticle
-      value: 
-      objectReference: {fileID: 3462761218687308064, guid: ba67bbe1d553e2f438b83e9287e814ff, type: 3}
     - target: {fileID: 1196878196405511290, guid: 2f8e777c82e29c64bbfeeeff6b10af3a, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -305,17 +297,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2215368349697192388, guid: 2f8e777c82e29c64bbfeeeff6b10af3a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8296594115146223148, guid: 2f8e777c82e29c64bbfeeeff6b10af3a, type: 3}
       propertyPath: m_Name
       value: PlayerObject
-      objectReference: {fileID: 0}
-    - target: {fileID: 8296594115146223148, guid: 2f8e777c82e29c64bbfeeeff6b10af3a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f8e777c82e29c64bbfeeeff6b10af3a, type: 3}

@@ -14,13 +14,13 @@ namespace MortalCombat
 
         private CharacterID m_CharacterID;
 
-        private BoxCollider2D m_BoxCol;
+        private CapsuleCollider2D m_HitCol;
 
         private void Awake()
         {
             m_CharacterID = GetComponentInParent<CharacterID>();
-            m_BoxCol = GetComponent<BoxCollider2D>();
-            m_BoxCol.enabled = false;
+            m_HitCol = GetComponent<CapsuleCollider2D>();
+            m_HitCol.enabled = false;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
