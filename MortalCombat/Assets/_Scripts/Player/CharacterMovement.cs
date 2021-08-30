@@ -14,16 +14,16 @@ namespace MortalCombat
         [Range(0, 1), SerializeField] private float m_CrouchSpeed = .36f;          // Amount of maxSpeed applied to crouching movement. 1 = 100%
         [Range(0, .3f), SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
         [SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
-
-        [Header("Damagelist")]
-        public int lightAttackDmg;
-        public int heavyAttackDmg;
+        [SerializeField] private float m_ShootCooldown;
 
         [Header("NeedAssignment")]
         [SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
         [SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
         [SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
         [SerializeField] private Animator m_anim;
+        [SerializeField] private GameObject m_Projectile;
+        [SerializeField] private Transform m_FirePoint;
+
 
         const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
         private bool m_Grounded;            // Whether or not the player is grounded.
@@ -41,6 +41,8 @@ namespace MortalCombat
 
         private int m_ControllerID;
         private float m_hInput;
+        private float m_CurrentShootCooldown;
+        private bool m_CanShoot;
         [SerializeField] private bool m_InputAvaible;
 
         private KeyCode jump;
@@ -135,7 +137,11 @@ namespace MortalCombat
             m_hInput = Input.GetAxisRaw("Horizontal" + m_ControllerID);
 
             ConfigureControlButtons();
-            if (m_InputAvaible) { CheckInput(); }
+            if (m_InputAvaible) 
+            { 
+                CheckInput();
+                CoolDown();
+            }
         }
 
         private void CheckInput()
@@ -148,9 +154,11 @@ namespace MortalCombat
             {
                 AnimState(3, true);
             }
-            if (Input.GetKeyDown(rangedAttack))
+            if (Input.GetKeyDown(rangedAttack) && m_CanShoot)
             {
-
+                m_CanShoot = false;
+                GameObject projectile = Instantiate(m_Projectile, m_FirePoint.position, m_FirePoint.rotation);
+                projectile.GetComponent<Projectile>().m_CharacterID = GetComponent<CharacterID>();
             }
         }
 
@@ -190,10 +198,7 @@ namespace MortalCombat
             // Switch the way the player is labelled as facing.
             m_FacingRight = !m_FacingRight;
 
-            // Multiply the player's x local scale by -1.
-            Vector3 theScale = transform.localScale;
-            theScale.x *= -1;
-            transform.localScale = theScale;
+            transform.Rotate(0f, 180f, 0f);
         }
 
         private void AnimState(int animState, bool eventTrigger)
@@ -205,6 +210,34 @@ namespace MortalCombat
         public void InputsAviable(bool value)
         {
             m_InputAvaible = value;
+        }
+
+        private void ResetCooldown()
+        {
+            m_CurrentShootCooldown = m_ShootCooldown;
+        }
+
+        private void CoolDown()
+        {
+            if (m_CanShoot) { return; }
+
+            if(m_CurrentShootCooldown <= 0)
+            {
+                m_CanShoot = true;
+                ResetCooldown();
+            }
+            else
+            {
+                m_CurrentShootCooldown = Timer(m_CurrentShootCooldown);
+            }
+
+            GlobalEvents.SendMessage(new PlayerBulletMessage(m_ControllerID, m_CanShoot));
+        }
+
+        private float Timer(float timer)
+        {
+            timer -= Time.deltaTime;
+            return timer;
         }
     }
 }

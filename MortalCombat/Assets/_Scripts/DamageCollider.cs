@@ -12,15 +12,12 @@ namespace MortalCombat
 
         [SerializeField] private GameObject hitParticle;
 
-        private CharacterMovement m_CharacterMovement;
         private CharacterID m_CharacterID;
 
         private BoxCollider2D m_BoxCol;
-        private bool m_Disable;
 
         private void Awake()
         {
-            m_CharacterMovement = GetComponentInParent<CharacterMovement>();
             m_CharacterID = GetComponentInParent<CharacterID>();
             m_BoxCol = GetComponent<BoxCollider2D>();
             m_BoxCol.enabled = false;
@@ -28,10 +25,9 @@ namespace MortalCombat
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if(collision.gameObject.layer == 7 && !m_Disable)
+            if(collision.gameObject.layer == 7)
             {
                 if (collision.gameObject.GetComponent<CharacterID>().m_PlayerID == m_CharacterID.m_PlayerID) { return; }
-                m_Disable = true;
                 CharacterHealth health = collision.gameObject.GetComponent<CharacterHealth>();
                 Instantiate(hitParticle, collision.gameObject.transform.position, Quaternion.identity);
                 Camera.main.transform.DOShakePosition(.4f, .5f, 20, 90, false, true);
@@ -46,7 +42,6 @@ namespace MortalCombat
                 {
                     health.DamageTaken(m_Damage);
                 }
-                m_Disable = false;
             }
         }
     }
