@@ -16,7 +16,7 @@ namespace Siren
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		/// <param name="context">Context the audio belongs to. Think of i as an indentifier for the sound you're about to operate on.</param>
+		/// <param name="context">Context the audio belongs to. Think of it as an indentifier for the sound you're about to operate on.</param>
 		/// <param name="command">What is the system supposed to do?</param>
 		/// <param name="identifier">What sound are we doing this to?</param>
 		public AudioEvent(object context, AudioCommands command, string identifier = "",
