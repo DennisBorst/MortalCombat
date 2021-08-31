@@ -15,6 +15,7 @@ namespace MortalCombat
         [Range(0, .3f), SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
         [SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
         [SerializeField] private float m_ShootCooldown;
+        [SerializeField] private float m_MeleeCooldown;
 
         [Header("NeedAssignment")]
         [SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
@@ -43,7 +44,9 @@ namespace MortalCombat
         private int m_ControllerID;
         private float m_hInput;
         private float m_CurrentShootCooldown;
+        private float m_CurrentMeleeCooldown;
         private bool m_CanShoot;
+        private bool m_CanPunch;
         [SerializeField] private bool m_InputAvaible;
         [SerializeField] private bool m_FlipCharacterOnStart;
 
@@ -148,8 +151,8 @@ namespace MortalCombat
             m_hInput = Input.GetAxisRaw("Horizontal" + m_ControllerID);
 
             ConfigureControlButtons();
-            if (m_InputAvaible) 
-            { 
+            if (m_InputAvaible)
+            {
                 CheckInput();
                 CoolDown();
             }
@@ -162,8 +165,9 @@ namespace MortalCombat
                 Move(m_hInput, true);
                 AnimState(5, false);
             }
-            if (Input.GetKeyDown(meleeAttack))
+            if (Input.GetKeyDown(meleeAttack) && m_CanPunch)
             {
+                m_CanPunch = false;
                 m_MeleeParticle.SetActive(true);
                 AnimState(3, true);
             }
@@ -230,26 +234,41 @@ namespace MortalCombat
             AnimState(4, true);
         }
 
-        private void ResetCooldown()
+        private void ResetCooldown(bool melee)
         {
-            m_CurrentShootCooldown = m_ShootCooldown;
+            if (melee) { m_CurrentMeleeCooldown = m_MeleeCooldown; }
+            else { m_CurrentShootCooldown = m_ShootCooldown; }
         }
 
         private void CoolDown()
         {
-            if (m_CanShoot) { return; }
-
-            if(m_CurrentShootCooldown <= 0)
+            if (!m_CanPunch)
             {
-                m_CanShoot = true;
-                ResetCooldown();
-            }
-            else
-            {
-                m_CurrentShootCooldown = Timer(m_CurrentShootCooldown);
+                if (m_CurrentMeleeCooldown <= 0)
+                {
+                    m_CanPunch = true;
+                    ResetCooldown(true);
+                }
+                else
+                {
+                    m_CurrentMeleeCooldown = Timer(m_CurrentMeleeCooldown);
+                }
             }
 
-            GlobalEvents.SendMessage(new PlayerBulletMessage(m_ControllerID, m_CanShoot));
+            if (!m_CanShoot)
+            {
+                if (m_CurrentShootCooldown <= 0)
+                {
+                    m_CanShoot = true;
+                    ResetCooldown(false);
+                }
+                else
+                {
+                    m_CurrentShootCooldown = Timer(m_CurrentShootCooldown);
+                }
+
+                GlobalEvents.SendMessage(new PlayerBulletMessage(m_ControllerID, m_CanShoot));
+            }
         }
 
         private float Timer(float timer)

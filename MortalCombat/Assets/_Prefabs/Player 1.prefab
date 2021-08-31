@@ -70,6 +70,7 @@ MonoBehaviour:
   m_MovementSmoothing: 0.05
   m_AirControl: 1
   m_ShootCooldown: 0.7
+  m_MeleeCooldown: 1.1
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 64
@@ -78,11 +79,12 @@ MonoBehaviour:
   m_anim: {fileID: 5991632288716955128}
   m_Projectile: {fileID: 6701204292452368714, guid: a7d438f77f0d9e84584fe99a99982706, type: 3}
   m_FirePoint: {fileID: 7816837410655422381}
-  m_MeleeParticle: {fileID: 5262470165613481651}
+  m_MeleeParticle: {fileID: 8244991551697934964}
   OnLandEvent:
     m_PersistentCalls:
       m_Calls: []
   m_InputAvaible: 0
+  m_FlipCharacterOnStart: 0
 --- !u!114 &6623008891668711587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,8 +322,8 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 8305265567611223969, guid: 2f8e777c82e29c64bbfeeeff6b10af3a, type: 3}
   m_PrefabInstance: {fileID: 2334191535027118681}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5262470165613481651 stripped
+--- !u!1 &8244991551697934964 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 7596651654644526314, guid: 2f8e777c82e29c64bbfeeeff6b10af3a, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5911166875597715501, guid: 2f8e777c82e29c64bbfeeeff6b10af3a, type: 3}
   m_PrefabInstance: {fileID: 2334191535027118681}
   m_PrefabAsset: {fileID: 0}
