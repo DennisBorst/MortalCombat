@@ -4,8 +4,10 @@ using UnityEngine;
 
 namespace MortalCombat
 {
+    [DefaultExecutionOrder(-1)]
     public class CharacterSkinSelection : MonoBehaviour
     {
+        [SerializeField] private Animator animator;
         [SerializeField] private GameObject currentSkin = null;
         [SerializeField] private GameObject character = null;
         [SerializeField] private CharacterID characterId = null;
@@ -25,8 +27,16 @@ namespace MortalCombat
                 obj.name = "CharacterObject";
                 currentSkin = obj;
 
-                character.SetActive(true);
+                if (animator)
+                    StartCoroutine(RebindCoroutine());
             }
+        }
+
+        IEnumerator RebindCoroutine()
+        {
+            yield return null;
+            if (animator)
+                animator.Rebind();
         }
     }
 }
