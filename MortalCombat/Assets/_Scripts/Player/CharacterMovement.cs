@@ -176,6 +176,7 @@ namespace MortalCombat
                 m_CanShoot = false;
                 GameObject projectile = Instantiate(m_Projectile, m_FirePoint.position, m_FirePoint.rotation);
                 projectile.GetComponent<Projectile>().m_CharacterID = GetComponent<CharacterID>();
+                GlobalEvents.SendMessage(new PlayerBulletMessage(m_ControllerID, m_CanShoot));
             }
         }
 
@@ -259,6 +260,8 @@ namespace MortalCombat
             {
                 if (m_CurrentShootCooldown <= 0)
                 {
+                    GlobalEvents.SendMessage(new PlayerBulletMessage(m_ControllerID, m_CanShoot));
+
                     m_CanShoot = true;
                     ResetCooldown(false);
                 }
@@ -267,7 +270,6 @@ namespace MortalCombat
                     m_CurrentShootCooldown = Timer(m_CurrentShootCooldown);
                 }
 
-                GlobalEvents.SendMessage(new PlayerBulletMessage(m_ControllerID, m_CanShoot));
             }
         }
 
