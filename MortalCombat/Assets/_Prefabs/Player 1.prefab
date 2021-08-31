@@ -78,6 +78,7 @@ MonoBehaviour:
   m_anim: {fileID: 5991632288716955128}
   m_Projectile: {fileID: 6701204292452368714, guid: a7d438f77f0d9e84584fe99a99982706, type: 3}
   m_FirePoint: {fileID: 7816837410655422381}
+  m_MeleeParticle: {fileID: 5262470165613481651}
   OnLandEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -154,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07be7fdf66977dc428372ec8ef24dbf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentSkin: {fileID: 0}
   character: {fileID: 6001005505691053173}
   characterId: {fileID: 4598528201690325252}
 --- !u!1 &4598528202714393664
@@ -316,5 +318,10 @@ Transform:
 --- !u!95 &5991632288716955128 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 8305265567611223969, guid: 2f8e777c82e29c64bbfeeeff6b10af3a, type: 3}
+  m_PrefabInstance: {fileID: 2334191535027118681}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5262470165613481651 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7596651654644526314, guid: 2f8e777c82e29c64bbfeeeff6b10af3a, type: 3}
   m_PrefabInstance: {fileID: 2334191535027118681}
   m_PrefabAsset: {fileID: 0}

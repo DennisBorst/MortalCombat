@@ -33,6 +33,7 @@ namespace MortalCombat
                 GlobalEvents.SendMessage(new PlayerDeathMessage(m_PlayerID));
             }
 
+            m_CharacterMovement.Hit();
             GlobalEvents.SendMessage(new PlayerDamagedMessage(m_PlayerID, m_CurrentHealth));
         }
     }

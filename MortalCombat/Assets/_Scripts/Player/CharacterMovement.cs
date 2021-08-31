@@ -23,6 +23,7 @@ namespace MortalCombat
         [SerializeField] private Animator m_anim;
         [SerializeField] private GameObject m_Projectile;
         [SerializeField] private Transform m_FirePoint;
+        [SerializeField] private GameObject m_MeleeParticle;
 
 
         const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
@@ -44,6 +45,7 @@ namespace MortalCombat
         private float m_CurrentShootCooldown;
         private bool m_CanShoot;
         [SerializeField] private bool m_InputAvaible;
+        [SerializeField] private bool m_FlipCharacterOnStart;
 
         private KeyCode jump;
         private KeyCode meleeAttack;
@@ -57,6 +59,8 @@ namespace MortalCombat
             if (OnLandEvent == null)
                 OnLandEvent = new UnityEvent();
 
+            if (m_FlipCharacterOnStart)
+                Flip();
 
             GlobalEvents.AddListener<GameStartMessage>(OnGameStart);
             GlobalEvents.AddListener<PlayerWinMessage>(OnPlayerWin);
@@ -126,9 +130,16 @@ namespace MortalCombat
             {
                 Move(m_hInput, false);
 
-                //Animations
-                if (Mathf.Abs(m_hInput) <= 0f) { AnimState(0, false); }
-                else if (Mathf.Abs(m_hInput) > 0f) { AnimState(1, false); }
+                if (m_Grounded)
+                {
+                    //Animations
+                    if (Mathf.Abs(m_hInput) <= 0f) { AnimState(0, false); }
+                    else if (Mathf.Abs(m_hInput) > 0f) { AnimState(1, false); }
+                }
+                else
+                {
+                    AnimState(5, false);
+                }
             }
         }
 
@@ -149,9 +160,11 @@ namespace MortalCombat
             if (m_Grounded && Input.GetKeyDown(jump))
             {
                 Move(m_hInput, true);
+                AnimState(5, false);
             }
             if (Input.GetKeyDown(meleeAttack))
             {
+                m_MeleeParticle.SetActive(true);
                 AnimState(3, true);
             }
             if (Input.GetKeyDown(rangedAttack) && m_CanShoot)
@@ -210,6 +223,11 @@ namespace MortalCombat
         public void InputsAviable(bool value)
         {
             m_InputAvaible = value;
+        }
+
+        public void Hit()
+        {
+            AnimState(4, true);
         }
 
         private void ResetCooldown()
