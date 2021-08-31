@@ -260,10 +260,9 @@ namespace MortalCombat
             {
                 if (m_CurrentShootCooldown <= 0)
                 {
-                    GlobalEvents.SendMessage(new PlayerBulletMessage(m_ControllerID, m_CanShoot));
-
                     m_CanShoot = true;
                     ResetCooldown(false);
+                    GlobalEvents.SendMessage(new PlayerBulletMessage(m_ControllerID, m_CanShoot));
                 }
                 else
                 {
