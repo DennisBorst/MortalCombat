@@ -38,7 +38,11 @@ namespace MortalCombat
                 return;
 
             SetImage(obj.bulletReady);
-            TriggerAnimation();
+
+            if (obj.bulletReady)
+            {
+                TriggerAnimation();
+            }
         }
 
         private void SetImage(bool value)
