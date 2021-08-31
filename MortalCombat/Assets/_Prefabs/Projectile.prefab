@@ -4878,6 +4878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c4f99c69dbcb734db682dc90d5ca0e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_DisableAfterTime: 0
   m_Time: 2
 --- !u!1 &4996077755422996337
 GameObject:
@@ -9907,6 +9908,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c4f99c69dbcb734db682dc90d5ca0e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_DisableAfterTime: 0
   m_Time: 3
 --- !u!50 &829604132208454723
 Rigidbody2D:

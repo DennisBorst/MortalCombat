@@ -254,8 +254,8 @@ PrefabInstance:
       value: Fist
       objectReference: {fileID: 0}
     - target: {fileID: 8532090668819459907, guid: 3f17133d651264c43a116cfb68666b89, type: 3}
-      propertyPath: moveWithTransform
-      value: 0
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 8532090668819459908, guid: 3f17133d651264c43a116cfb68666b89, type: 3}
       propertyPath: m_RootOrder

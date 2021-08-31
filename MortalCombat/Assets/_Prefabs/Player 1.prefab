@@ -70,7 +70,7 @@ MonoBehaviour:
   m_MovementSmoothing: 0.05
   m_AirControl: 1
   m_ShootCooldown: 0.7
-  m_MeleeCooldown: 1.1
+  m_MeleeCooldown: 0.9
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 64
@@ -301,6 +301,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2468349512402464985, guid: 2f8e777c82e29c64bbfeeeff6b10af3a, type: 3}
+      propertyPath: hitParticle
+      value: 
+      objectReference: {fileID: 7576629731422269711, guid: 14a0d06b226a14a449336af962246d5b, type: 3}
     - target: {fileID: 8296594115146223148, guid: 2f8e777c82e29c64bbfeeeff6b10af3a, type: 3}
       propertyPath: m_Name
       value: PlayerObject
