@@ -29,7 +29,6 @@ namespace MortalCombat
             gameObject.SetActive(true);
             text.text = string.Format(format, obj.playerId + 1);
             animator.SetTrigger("start");
-            Debug.Log("SCREW THIS MAN");
         }
 
         public void GoToMainMenu()
