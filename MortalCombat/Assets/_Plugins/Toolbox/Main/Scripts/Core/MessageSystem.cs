@@ -98,9 +98,11 @@ namespace ToolBox
 
             if (_Listeners.TryGetValue(typeof(T), out List<Delegate> methods))
             {
-				for (int i = 0; i < methods.Count; i++)
+                // Make a copy of the original list to call.
+                Delegate[] invokables = methods.ToArray();
+				for (int i = 0; i < invokables.Length; i++)
 				{
-					((Action<T>)methods[i]).Invoke(message);
+					((Action<T>)invokables[i]).Invoke(message);
 				}
             }
         }
