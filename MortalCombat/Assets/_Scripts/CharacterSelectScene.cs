@@ -14,11 +14,13 @@ namespace MortalCombat
         private void Start()
         {
             GlobalEvents.AddListener<PlayerReady>(OnPlayerReady);
+            GlobalEvents.AddListener<PlayerUnready>(OnPlayerUnready);
         }
 
         private void OnDestroy()
         {
             GlobalEvents.RemoveListener<PlayerReady>(OnPlayerReady);
+            GlobalEvents.RemoveListener<PlayerUnready>(OnPlayerUnready);
         }
 
         private void OnPlayerReady(PlayerReady obj)
@@ -29,5 +31,9 @@ namespace MortalCombat
                 SceneManager.LoadScene("Game", LoadSceneMode.Single);
         }
 
+        private void OnPlayerUnready(PlayerUnready obj)
+        {
+            totalPlayersReady--;
+        }
     }
 }

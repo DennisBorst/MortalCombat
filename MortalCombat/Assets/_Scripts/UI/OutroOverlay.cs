@@ -29,11 +29,12 @@ namespace MortalCombat
             gameObject.SetActive(true);
             text.text = string.Format(format, obj.playerId + 1);
             animator.SetTrigger("start");
+            ScoreManager.Instance.SetScore(obj.playerId);
         }
 
         public void GoToMainMenu()
         {
-            SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
+            SceneManager.LoadScene("Character Select", LoadSceneMode.Single);
         }
     }
 }
