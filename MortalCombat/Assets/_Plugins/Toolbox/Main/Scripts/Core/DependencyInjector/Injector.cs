@@ -84,6 +84,7 @@ namespace ToolBox.Injection
             {
                 if (value != null)
                 {
+                    DependencyStack.Pop();
                     return value;
                 }
                 else
@@ -100,6 +101,7 @@ namespace ToolBox.Injection
                 if (_Providers[i].RequestType(type, out object result))
                 {
                     _TypeToInstanceBindings.Add(type, result);
+                    DependencyStack.Pop();
                     return result;
                 }
             }
