@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 using System;
-using UnityEngine;
 
 namespace ToolBox.Injection
 {
+
     /// <summary>
     /// Injector used for Dependency Injection
     /// </summary>
@@ -34,6 +34,34 @@ namespace ToolBox.Injection
             if (target == null)
                 throw new ArgumentNullException(nameof(target));
 
+            InjectFields(target);
+            InjectPerMethod(target);
+        }
+
+        private void InjectFields(object target)
+        {
+            Type type = target.GetType();
+            FieldInfo[] fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            for (int i = 0; i < fields.Length; i++)
+            {
+                if (fields[i].IsDefined(typeof(DependencyAttribute), false))
+                {
+                    var value = FetchInstanceForType(fields[i].FieldType);
+                    if (value != null)
+                        fields[i].SetValue(target, value);
+                    return;
+                }
+            }
+        }
+
+        internal void LoadTypes(Type[] types)
+        {
+            for (int i = 0; i < types.Length; i++)
+                FetchInstanceForType(types[i]);
+        }
+
+        private void InjectPerMethod(object target)
+        {
             Type type = target.GetType();
             MethodInfo method = type.GetMethod("GetDependencies");
 
@@ -65,10 +93,10 @@ namespace ToolBox.Injection
         {
             Type type = parameter.ParameterType;
 
-            return FetchInstanceForType(ref type);
+            return FetchInstanceForType(type);
         }
 
-        private object FetchInstanceForType(ref Type type)
+        private object FetchInstanceForType(Type type)
         {
             // If we bound his type to a certain implemention, convert these
             while (_TypeToTypeBindings.TryGetValue(type, out Type newType))

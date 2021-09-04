@@ -10,13 +10,24 @@ namespace ToolBox.Injection
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void StartBootstrappedServices()
         {
-            TypeHelper.GetAllTypesThatInherit<IBootstrapService>();
+            var types = TypeHelper.GetAllTypesThatInherit<IBootstrapService>();
+
+            if (types.NullOrNoElements())
+                return;
+            
+            GlobalInjector.Injector.LoadTypes(types);
         } 
     }
 
     class ServiceProvider : DependencyInstanceProvider
     {
+        public ServiceProvider()
+        {
+            m_BehaviorService = GenericObjectFactory.CreateObject<GlobalBehaviourService>();
+        }
+
         private Dictionary<Type, IService> _Cache = new Dictionary<Type, IService>();
+        private GlobalBehaviourService m_BehaviorService;
 
         override protected bool RequestType(Type type, out object result)
         {
@@ -32,7 +43,18 @@ namespace ToolBox.Injection
                 return true;
             }
 
+            if (typeof(MonoBehaviour).IsAssignableFrom(type))
+            {
+                result = m_BehaviorService.GetBehavior(type);
+                if (result != null)
+                    _Cache.Add(type, (IService)result);
+
+                return true;
+            }
+
             result = GenericObjectFactory.CreateObject(type, currentInjector);
+            _Cache.Add(type, (IService)result);
+
             return true;
         }
     }

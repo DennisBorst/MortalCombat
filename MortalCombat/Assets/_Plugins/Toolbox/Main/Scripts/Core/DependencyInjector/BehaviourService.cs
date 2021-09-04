@@ -1,7 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace ToolBox.Services
 {
+	/// <summary>
+	/// System service, please do not touch
+	/// </summary>
     public class GlobalBehaviourService : IService
 	{
 		public GameObject _GameObject;
@@ -14,14 +19,17 @@ namespace ToolBox.Services
             _GameObject.isStatic = true;
         }
 
+		public object GetBehavior(Type type)
+        {
+			if (_GameObject.TryGetComponent(type, out Component component))
+				return component;
+
+			return _GameObject.AddComponent(type);
+        }
+
 		public T GetBehavior<T>() where T : MonoBehaviour, new()
 		{
-			if (_GameObject.TryGetComponent(out T component))
-			{
-				return component;
-			}
-
-			return _GameObject.AddComponent<T>();
+			return (T)GetBehavior(typeof(T));
 		}
 	}
 }

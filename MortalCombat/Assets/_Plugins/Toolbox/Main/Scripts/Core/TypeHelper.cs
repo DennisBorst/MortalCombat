@@ -41,7 +41,7 @@ namespace ToolBox
 			{
 				types.AddRange(assembly.GetTypes().Where(
 					x => type.IsAssignableFrom(x) &&
-						type != x.GetType()));
+						type != x));
 			}
 
 			return types.ToArray();

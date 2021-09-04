@@ -6,6 +6,11 @@ namespace ToolBox
 {
     public static class ArrayExtensions
     {
+        public static bool NullOrNoElements<T>(this T[] src)
+        {
+            return src == null || src.Length == 0;
+        }
+
         public static T[] Fill<T>(this T[] src, T value)
         {
 #if DEBUG
