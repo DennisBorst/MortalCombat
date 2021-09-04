@@ -2,10 +2,11 @@ using ToolBox;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using ToolBox.Injection;
 
 namespace MortalCombat
 {
-    public class CharacterSelectionComponent : MonoBehaviour
+    public class CharacterSelectionComponent : DependencyBehavior
     {
         [SerializeField] private int playerId = 0;
         [SerializeField] Sprite[] sprites = null;
@@ -14,6 +15,8 @@ namespace MortalCombat
         [SerializeField] Image leftArrow;
         [SerializeField] Image rightArrow;
         [SerializeField] Image panel;
+
+        [Dependency] PlayerStatsService playerStats;
 
         private KeyCode keyCodeLeft;
         private KeyCode keyCodeRight;
@@ -25,8 +28,9 @@ namespace MortalCombat
         private int currentIndex;
         private bool ready;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             switch (playerId)
             {
                 case 0:
@@ -117,6 +121,7 @@ namespace MortalCombat
 
         public void GoToPreviousScene()
         {
+            playerStats.ResetKills();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
     }

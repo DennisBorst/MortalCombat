@@ -2,19 +2,22 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using ToolBox;
+using ToolBox.Injection;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace MortalCombat
 {
-    public class OutroOverlay : MonoBehaviour
+    public class OutroOverlay : DependencyBehavior
     {
         [SerializeField] TMPro.TMP_Text text = null;
         [SerializeField] Animator animator = null;
         [SerializeField] private string format = "Player {0} has won!";
+        [Dependency] private PlayerStatsService playerStats;
 
-        void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             GlobalEvents.AddListener<PlayerWinMessage>(OnPlayerWin);
             gameObject.SetActive(false);
         }
@@ -29,7 +32,7 @@ namespace MortalCombat
             gameObject.SetActive(true);
             text.text = string.Format(format, obj.playerId + 1);
             animator.SetTrigger("start");
-            ScoreManager.Instance.SetScore(obj.playerId);
+            playerStats.Addkills(obj.playerId, 1);
         }
 
         public void GoToMainMenu()
