@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Siren
 {
@@ -9,15 +10,29 @@ namespace Siren
     public static class Audio
     {
         private static readonly Lazy<SFXManager> s_SFXManager = new Lazy<SFXManager>(false);
-        private static readonly Lazy<SFXManager> s_MusicManager = new Lazy<SFXManager>(false);
 
-		/// <summary>
-		/// Used to send audio events inside of the audio 
-		/// </summary>
-		/// <param name="audioParams"></param>
-		public static void SendSFXEvent(AudioEvent audioParams)
+        /// <summary>
+        /// Used to send audio events inside of the audio 
+        /// </summary>
+        /// <param name="audioParams"></param>
+        private static void SendSFXEvent(AudioEvent audioParams)
         {
-			s_SFXManager.Value.ProcessEvent(audioParams);
+            s_SFXManager.Value.ProcessEvent(audioParams);
+        }
+
+        public static void Play(string identifier)
+        {
+            SendSFXEvent(new AudioEvent(null, AudioCommands.PLAY, identifier));
+        }
+
+        public static void Play(string identifier, Transform location)
+        {
+            SendSFXEvent(new AudioEvent(null, AudioCommands.PLAY, identifier, followTransform: location));
+        }
+
+        public static void Play(string identifier, Vector3 worldPosition)
+        {
+            SendSFXEvent(new AudioEvent(null, AudioCommands.PLAY, identifier, worldPosition: worldPosition));
         }
     }
 }
