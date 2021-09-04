@@ -11,12 +11,16 @@ namespace MortalCombat
         [SerializeField] private int playerId = 0;
         [SerializeField] Sprite[] sprites = null;
         [SerializeField] Image spriteRenderer;
-
         [SerializeField] Image leftArrow;
         [SerializeField] Image rightArrow;
         [SerializeField] Image panel;
 
+        [SerializeField] Animator leftArrowAnimator;
+        [SerializeField] Animator rightArrowAnimator;
+        [SerializeField] Animator panelAnimator;
+
         [Dependency] PlayerStatsService playerStats;
+
 
         private KeyCode keyCodeLeft;
         private KeyCode keyCodeRight;
@@ -74,6 +78,8 @@ namespace MortalCombat
                 if (Input.GetKeyDown(keyCodeReady))
                 {
                     ready = true;
+                    panelAnimator.SetTrigger("ready");
+
                     leftArrow.gameObject.SetActive(false);
                     rightArrow.gameObject.SetActive(false);
                     panel.color = Color.green;
@@ -89,6 +95,7 @@ namespace MortalCombat
             {
                 if (Input.GetKeyDown(keyCodeUnReady))
                 {
+                    panelAnimator.SetTrigger("unready");
                     ready = false;
                     leftArrow.gameObject.SetActive(true);
                     rightArrow.gameObject.SetActive(true);
@@ -100,6 +107,8 @@ namespace MortalCombat
 
         private void Next()
         {
+
+            rightArrowAnimator.SetTrigger("trigger");
             currentIndex++;
             if (currentIndex == sprites.Length)
                 currentIndex = 0;
@@ -108,6 +117,7 @@ namespace MortalCombat
 
         private void Previous()
         {
+            leftArrowAnimator.SetTrigger("trigger");
             currentIndex--;
             if (currentIndex == -1)
                 currentIndex = sprites.Length - 1;

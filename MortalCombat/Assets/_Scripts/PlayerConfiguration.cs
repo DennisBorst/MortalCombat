@@ -16,6 +16,14 @@ namespace MortalCombat
             SelectedIndexPerPlayer[playerId] = index;
         }
 
+        public int GetSelectedIndex(int playerId)
+        {
+            if (SelectedIndexPerPlayer.TryGetValue(playerId, out int index))
+                return index;
+
+            return 0;
+        }
+
         public GameObject GetPlayerSkin(int playerId)
         {
             return playerskins[SelectedIndexPerPlayer[playerId]];
