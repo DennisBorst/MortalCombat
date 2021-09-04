@@ -66,6 +66,12 @@ namespace MortalCombat
             color = panel.color;
         }
 
+        public void Start()
+        {
+            currentIndex = PlayerConfiguration.Instance.GetSelectedIndex(playerId);
+            SwapCharacterSprite(sprites[currentIndex]);
+        }
+
 
         private void Update()
         {
