@@ -6,7 +6,7 @@ using ToolBox.Editor;
 
 namespace Siren.Editor
 {
-	/// <summary>
+    /// <summary>
     /// Used to render and control a selectable list of all audio libraries in the project
     /// /// </summary>
     public class AudioLibraryList
@@ -37,7 +37,7 @@ namespace Siren.Editor
             if (GUILayout.Button("Create New Library"))
             {
 				EditorWindow.CreateInstance<CreateAudioLibraryAssetPopup>()
-					.SetFolder("Assets/Audio/Resources/")
+					.SetFolder(Config.PATH_AUDIO_LIBRARIES)
 					.CenterOnRect(_CurrentWindow.position)
                     .OnCreated += OnNewElementcreated;
             }

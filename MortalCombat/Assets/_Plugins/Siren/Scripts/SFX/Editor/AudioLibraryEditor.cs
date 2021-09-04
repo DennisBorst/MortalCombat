@@ -88,7 +88,7 @@ namespace Siren.Editor
 	        if (GUILayout.Button("Add"))
 	        {
 		        EditorWindow.CreateInstance<CreateAudioAssetPopup>()
-			        .SetFolder("Assets/Audio/AudioAssets/")
+			        .SetFolder(Config.PATH_AUDIO_ASSETS)
 					.CenterOnRect(_currentWindow.position)
 			        .OnCreated += AddElement;
 	        }
