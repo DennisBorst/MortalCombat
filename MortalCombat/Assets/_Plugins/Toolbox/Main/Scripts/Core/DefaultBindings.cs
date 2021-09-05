@@ -25,11 +25,12 @@ namespace ToolBox.Input
 
             new InputBinding {Player = 0, Name = "Left",    DeviceName = "Keyboard", DeviceIndex = 0, DeviceInputName = KeyCode.LeftArrow.ToString()},
             new InputBinding {Player = 0, Name = "Right",   DeviceName = "Keyboard", DeviceIndex = 0, DeviceInputName = KeyCode.RightArrow.ToString()},
-            new InputBinding {Player = 0, Name = "Up",      DeviceName = "Keyboard", DeviceIndex = 0, DeviceInputName =  KeyCode.UpArrow.ToString()},
+            new InputBinding {Player = 0, Name = "Up",      DeviceName = "Keyboard", DeviceIndex = 0, DeviceInputName = KeyCode.UpArrow.ToString()},
             new InputBinding {Player = 0, Name = "Down",    DeviceName = "Keyboard", DeviceIndex = 0, DeviceInputName = KeyCode.DownArrow.ToString()},
             new InputBinding {Player = 0, Name = "Back",    DeviceName = "Keyboard", DeviceIndex = 0, DeviceInputName = KeyCode.Backspace.ToString()},
             new InputBinding {Player = 0, Name = "Confirm", DeviceName = "Keyboard", DeviceIndex = 0, DeviceInputName = KeyCode.Return.ToString()},
             new InputBinding {Player = 0, Name = "Jump",    DeviceName = "Keyboard", DeviceIndex = 0, DeviceInputName = KeyCode.Keypad0.ToString()},
+            new InputBinding {Player = 0, Name = "Jump",    DeviceName = "Keyboard", DeviceIndex = 0, DeviceInputName = KeyCode.UpArrow.ToString()},
             new InputBinding {Player = 0, Name = "Throw",   DeviceName = "Keyboard", DeviceIndex = 0, DeviceInputName = KeyCode.Keypad2.ToString()},
             new InputBinding {Player = 0, Name = "Punch",   DeviceName = "Keyboard", DeviceIndex = 0, DeviceInputName = KeyCode.Keypad1.ToString()},
 
@@ -51,11 +52,13 @@ namespace ToolBox.Input
             new InputBinding {Player = 1, Name = "Right",   DeviceName = "Keyboard", DeviceIndex = 0, DeviceInputName = KeyCode.D.ToString()},
             new InputBinding {Player = 1, Name = "Up",      DeviceName = "Keyboard", DeviceIndex = 0, DeviceInputName = KeyCode.W.ToString()},
             new InputBinding {Player = 1, Name = "Down",    DeviceName = "Keyboard", DeviceIndex = 0, DeviceInputName = KeyCode.S.ToString()},
-            new InputBinding {Player = 1, Name = "Back",    DeviceName = "Keyboard", DeviceIndex = 0, DeviceInputName = KeyCode.Q.ToString()},
-            new InputBinding {Player = 1, Name = "Confirm", DeviceName = "Keyboard", DeviceIndex = 0, DeviceInputName = KeyCode.G.ToString()},
-            new InputBinding {Player = 1, Name = "Jump",    DeviceName = "Keyboard", DeviceIndex = 0, DeviceInputName = KeyCode.Space.ToString()},
+            new InputBinding {Player = 1, Name = "Jump",    DeviceName = "Keyboard", DeviceIndex = 0, DeviceInputName = KeyCode.F.ToString()},
+            new InputBinding {Player = 1, Name = "Jump",    DeviceName = "Keyboard", DeviceIndex = 0, DeviceInputName = KeyCode.W.ToString()},
             new InputBinding {Player = 1, Name = "Throw",   DeviceName = "Keyboard", DeviceIndex = 0, DeviceInputName = KeyCode.H.ToString()},
             new InputBinding {Player = 1, Name = "Punch",   DeviceName = "Keyboard", DeviceIndex = 0, DeviceInputName = KeyCode.G.ToString()},
+            
+            new InputBinding {Player = 1, Name = "Back",    DeviceName = "Keyboard", DeviceIndex = 0, DeviceInputName = KeyCode.G.ToString()},
+            new InputBinding {Player = 1, Name = "Confirm", DeviceName = "Keyboard", DeviceIndex = 0, DeviceInputName = KeyCode.F.ToString()},
 
             // ** PLAYER 3 **
             new InputBinding {Player = 2, Name = "Left",    DeviceName = "XBox", DeviceIndex = 2, DeviceInputName = "LStickLeft"},
