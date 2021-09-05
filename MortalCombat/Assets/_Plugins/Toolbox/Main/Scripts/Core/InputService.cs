@@ -17,7 +17,7 @@ namespace ToolBox.Input
 
         InputBinding[] bindings = DefaultBindings.bindings;
 
-        Dictionary<string, float> previousValues = new Dictionary<string, float>();
+        internal Dictionary<string, float> previousValues = new Dictionary<string, float>();
 
         public void LateUpdate()
         {
