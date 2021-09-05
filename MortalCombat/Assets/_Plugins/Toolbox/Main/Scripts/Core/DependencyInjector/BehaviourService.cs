@@ -13,9 +13,9 @@ namespace ToolBox.Services
 
         public GlobalBehaviourService()
         {
-            _GameObject = new GameObject("Service Behaviors");
+            _GameObject = new GameObject("Toolbox Service Behaviors");
             Object.DontDestroyOnLoad(_GameObject);
-            _GameObject.hideFlags = HideFlags.DontSave | HideFlags.NotEditable;
+            _GameObject.hideFlags = HideFlags.DontSave;
             _GameObject.isStatic = true;
         }
 
