@@ -121,6 +121,12 @@ namespace MortalCombat
                     AnimState(5, false);
                 }
             }
+            else
+            {
+                // stop moving
+                Move(0, false);
+                AnimState(0, false);
+            }
         }
 
         private void Update()
