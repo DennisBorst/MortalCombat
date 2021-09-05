@@ -40,8 +40,8 @@ namespace ToolBox.Input
 
             new InputBinding {Player = 1, Name = "Left",    DeviceName = "XBox", DeviceIndex = 1, DeviceInputName = "LeftX-", DeadZone = XBOX_DEADZONE},
             new InputBinding {Player = 1, Name = "Right",   DeviceName = "XBox", DeviceIndex = 1, DeviceInputName = "LeftX+", DeadZone = XBOX_DEADZONE},
-            new InputBinding {Player = 1, Name = "Up",      DeviceName = "XBox", DeviceIndex = 1, DeviceInputName = "LeftY+", DeadZone = XBOX_DEADZONE},
-            new InputBinding {Player = 1, Name = "Down",    DeviceName = "XBox", DeviceIndex = 1, DeviceInputName = "LeftY-", DeadZone = XBOX_DEADZONE},
+            new InputBinding {Player = 1, Name = "Up",      DeviceName = "XBox", DeviceIndex = 1, DeviceInputName = "LeftY-", DeadZone = XBOX_DEADZONE},
+            new InputBinding {Player = 1, Name = "Down",    DeviceName = "XBox", DeviceIndex = 1, DeviceInputName = "LeftY+", DeadZone = XBOX_DEADZONE},
             new InputBinding {Player = 1, Name = "Jump",    DeviceName = "XBox", DeviceIndex = 1, DeviceInputName = "A"},
             new InputBinding {Player = 1, Name = "Confirm", DeviceName = "XBox", DeviceIndex = 1, DeviceInputName = "A"},
             new InputBinding {Player = 1, Name = "Throw",   DeviceName = "XBox", DeviceIndex = 1, DeviceInputName = "X"},
