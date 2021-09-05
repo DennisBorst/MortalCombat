@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace ToolBox
 {
+
     public static class TypeHelper 
 	{
 		public static bool Instantiatable(this Type type)

@@ -4,7 +4,6 @@ using System;
 
 namespace ToolBox.Injection
 {
-
     /// <summary>
     /// Injector used for Dependency Injection
     /// </summary>
@@ -49,7 +48,7 @@ namespace ToolBox.Injection
                     var value = FetchInstanceForType(fields[i].FieldType);
                     if (value != null)
                         fields[i].SetValue(target, value);
-                    return;
+                    continue;
                 }
             }
         }

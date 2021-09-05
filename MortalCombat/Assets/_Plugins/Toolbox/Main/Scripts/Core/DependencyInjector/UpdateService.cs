@@ -5,6 +5,7 @@ namespace ToolBox.Services
 {
     public class UpdateService : IService
 	{
+		[DefaultExecutionOrder(-100)]
 		private class UpdateBehaviour : MonoBehaviour
 		{
 			public event Action OnUpdate;

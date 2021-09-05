@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using ToolBox.Injection;
+using ToolBox.Input;
 
 namespace MortalCombat
 {
@@ -20,12 +21,7 @@ namespace MortalCombat
         [SerializeField] Animator panelAnimator;
 
         [Dependency] PlayerStatsService playerStats;
-
-
-        private KeyCode keyCodeLeft;
-        private KeyCode keyCodeRight;
-        private KeyCode keyCodeReady;
-        private KeyCode keyCodeUnReady;
+        [Dependency] InputService input;
 
         private Color color;
 
@@ -35,33 +31,6 @@ namespace MortalCombat
         protected override void Awake()
         {
             base.Awake();
-            switch (playerId)
-            {
-                case 0:
-                    keyCodeLeft = KeyCode.Joystick1Button4;
-                    keyCodeRight = KeyCode.Joystick1Button5;
-                    keyCodeReady = KeyCode.Joystick1Button0;
-                    keyCodeUnReady = KeyCode.Joystick1Button1;
-                    break;
-                case 1:
-                    keyCodeLeft = KeyCode.Joystick2Button4;
-                    keyCodeRight = KeyCode.Joystick2Button5;
-                    keyCodeReady = KeyCode.Joystick2Button0;
-                    keyCodeUnReady = KeyCode.Joystick2Button1;
-                    break;
-                case 2:
-                    keyCodeLeft = KeyCode.Joystick3Button4;
-                    keyCodeRight = KeyCode.Joystick3Button5;
-                    keyCodeReady = KeyCode.Joystick3Button0;
-                    keyCodeUnReady = KeyCode.Joystick3Button1;
-                    break;
-                case 3:
-                    keyCodeLeft = KeyCode.Joystick4Button4;
-                    keyCodeRight = KeyCode.Joystick4Button5;
-                    keyCodeReady = KeyCode.Joystick4Button0;
-                    keyCodeUnReady = KeyCode.Joystick4Button1;
-                    break;
-            }
 
             color = panel.color;
         }
@@ -77,11 +46,12 @@ namespace MortalCombat
         {
             if (!ready)
             {
-                if (Input.GetKeyDown(keyCodeLeft))
+                if (input.Down(playerId, "Left") || input.Down(playerId, "LeftUI"))
                     Previous();
-                if (Input.GetKeyDown(keyCodeRight))
+                if (input.Down(playerId, "Right") || input.Down(playerId, "RightUI"))
                     Next();
-                if (Input.GetKeyDown(keyCodeReady))
+
+                if (input.Down(playerId, "Confirm"))
                 {
                     ready = true;
                     panelAnimator.SetTrigger("ready");
@@ -92,14 +62,15 @@ namespace MortalCombat
                     PlayerConfiguration.Instance.SetSelectedIndex(playerId, currentIndex);
                     GlobalEvents.SendMessage(new PlayerReady(playerId));
                 }
-                if (Input.GetKeyDown(keyCodeUnReady))
+
+                if (input.Down(playerId, "Back"))
                 {
                     GoToPreviousScene();
                 }
             }
             else
             {
-                if (Input.GetKeyDown(keyCodeUnReady))
+                if (input.Down(playerId, "Back"))
                 {
                     panelAnimator.SetTrigger("unready");
                     ready = false;

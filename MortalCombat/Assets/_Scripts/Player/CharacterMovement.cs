@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using ToolBox;
+using ToolBox.Injection;
+using ToolBox.Input;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace MortalCombat
 {
-    public class CharacterMovement : MonoBehaviour
+    public class CharacterMovement : DependencyBehavior
     {
         [Header("General")]
         [SerializeField] private float m_JumpForce = 400f;                          // Amount of force added when the player jumps.
@@ -26,6 +28,7 @@ namespace MortalCombat
         [SerializeField] private Transform m_FirePoint;
         [SerializeField] private GameObject m_MeleeParticle;
 
+        [Dependency] private InputService input;
 
         const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
         private bool m_Grounded;            // Whether or not the player is grounded.
@@ -50,12 +53,9 @@ namespace MortalCombat
         [SerializeField] private bool m_InputAvaible;
         [SerializeField] private bool m_FlipCharacterOnStart;
 
-        private KeyCode jump;
-        private KeyCode meleeAttack;
-        private KeyCode rangedAttack;
-
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             m_rb = GetComponent<Rigidbody2D>();
             m_ControllerID = GetComponent<CharacterID>().m_PlayerID;
 
@@ -86,29 +86,6 @@ namespace MortalCombat
         {
             m_InputAvaible = true;
             //GlobalEvents.RemoveListener<GameStartMessage>(OnGameStart);
-        }
-
-        public void ConfigureControlButtons()
-        {
-            //controller identification for the buttons
-            switch (m_ControllerID)
-            {
-                case 0:
-                    jump = KeyCode.Joystick1Button0;
-                    meleeAttack = KeyCode.Joystick1Button1;
-                    rangedAttack = KeyCode.Joystick1Button2;
-                    break;
-                case 1:
-                    jump = KeyCode.Joystick2Button0;
-                    meleeAttack = KeyCode.Joystick2Button1;
-                    rangedAttack = KeyCode.Joystick2Button2;
-                    break;
-                default:
-                    jump = KeyCode.Space;
-                    meleeAttack = KeyCode.X;
-                    rangedAttack = KeyCode.C;
-                    break;
-            }
         }
 
         private void FixedUpdate()
@@ -148,9 +125,9 @@ namespace MortalCombat
 
         private void Update()
         {
-            m_hInput = Input.GetAxisRaw("Horizontal" + m_ControllerID);
+            m_hInput = input.Get(m_ControllerID, "Right") -
+                input.Get(m_ControllerID, "Left");                
 
-            ConfigureControlButtons();
             if (m_InputAvaible)
             {
                 CheckInput();
@@ -160,18 +137,20 @@ namespace MortalCombat
 
         private void CheckInput()
         {
-            if (m_Grounded && Input.GetKeyDown(jump))
+            if (input.Down(m_ControllerID, "Jump") && m_Grounded)
             {
                 Move(m_hInput, true);
                 AnimState(5, false);
             }
-            if (Input.GetKeyDown(meleeAttack) && m_CanPunch)
+
+            if (input.Down(m_ControllerID, "Punch") && m_CanPunch)
             {
                 m_CanPunch = false;
                 m_MeleeParticle.SetActive(true);
                 AnimState(3, true);
             }
-            if (Input.GetKeyDown(rangedAttack) && m_CanShoot)
+
+            if (input.Down(m_ControllerID, "Throw") && m_CanShoot)
             {
                 m_CanShoot = false;
                 GameObject projectile = Instantiate(m_Projectile, m_FirePoint.position, m_FirePoint.rotation);
