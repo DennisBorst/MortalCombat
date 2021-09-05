@@ -30,8 +30,8 @@ namespace ToolBox.Input
         {
             switch (axisName)
             {
-                case "Horizontal": return inputSystem.Get(0,"Right") - inputSystem.Get(0,"Left");
-                case "Vertical": return inputSystem.Get(0,"Up") - inputSystem.Get(0,"Down");
+                case "Horizontal": return inputSystem.Get("Right") - inputSystem.Get("Left");
+                case "Vertical": return inputSystem.Get("Up") - inputSystem.Get("Down");
             }
 
             return inputSystem.Get(0,axisName);
