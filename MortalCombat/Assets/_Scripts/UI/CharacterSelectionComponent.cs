@@ -11,19 +11,20 @@ namespace MortalCombat
     {
         [SerializeField] private int playerId = 0;
         [SerializeField] Sprite[] sprites = null;
-        [SerializeField] Image spriteRenderer;
-        [SerializeField] Image leftArrow;
-        [SerializeField] Image rightArrow;
-        [SerializeField] Image panel;
 
-        [SerializeField] Animator leftArrowAnimator;
-        [SerializeField] Animator rightArrowAnimator;
-        [SerializeField] Animator panelAnimator;
+        [SerializeField] Image currentface;
+        [SerializeField] Image previousFace;
+        [SerializeField] Image nextFace;
+
+        [SerializeField] Animator mainAnimator;
+        [SerializeField] Animator faceAnimator;
+        [SerializeField] Animator arrowLeft;
+        [SerializeField] Animator arrowRight;
+
+        [SerializeField] TMPro.TMP_Text text;
 
         [Dependency] PlayerStatsService playerStats;
         [Dependency] InputService input;
-
-        private Color color;
 
         private int currentIndex;
         private bool ready;
@@ -31,16 +32,14 @@ namespace MortalCombat
         protected override void Awake()
         {
             base.Awake();
-
-            color = panel.color;
         }
 
         public void Start()
         {
             currentIndex = PlayerConfiguration.Instance.GetSelectedIndex(playerId);
-            SwapCharacterSprite(sprites[currentIndex]);
+            SetSprites();
+            text.text = "PLAYER " + (playerId + 1);
         }
-
 
         private void Update()
         {
@@ -53,12 +52,9 @@ namespace MortalCombat
 
                 if (input.Down(playerId, "Confirm"))
                 {
-                    ready = true;
-                    panelAnimator.SetTrigger("ready");
+                    mainAnimator.SetTrigger("ready");
 
-                    leftArrow.gameObject.SetActive(false);
-                    rightArrow.gameObject.SetActive(false);
-                    panel.color = Color.green;
+                    ready = true;
                     PlayerConfiguration.Instance.SetSelectedIndex(playerId, currentIndex);
                     GlobalEvents.SendMessage(new PlayerReady(playerId));
                 }
@@ -72,11 +68,8 @@ namespace MortalCombat
             {
                 if (input.Down(playerId, "Back"))
                 {
-                    panelAnimator.SetTrigger("unready");
+                    mainAnimator.SetTrigger("unready");
                     ready = false;
-                    leftArrow.gameObject.SetActive(true);
-                    rightArrow.gameObject.SetActive(true);
-                    panel.color = color;
                     GlobalEvents.SendMessage(new PlayerUnready(playerId));
                 }
             }
@@ -84,26 +77,37 @@ namespace MortalCombat
 
         private void Next()
         {
-
-            rightArrowAnimator.SetTrigger("trigger");
-            currentIndex++;
-            if (currentIndex == sprites.Length)
-                currentIndex = 0;
-            SwapCharacterSprite(sprites[currentIndex]);
+            currentIndex = WrapSpriteIndex(currentIndex - 1);
+            SetSprites();
+            faceAnimator.SetTrigger("next");
+            arrowRight.SetTrigger("Start");
         }
 
         private void Previous()
         {
-            leftArrowAnimator.SetTrigger("trigger");
-            currentIndex--;
-            if (currentIndex == -1)
-                currentIndex = sprites.Length - 1;
-            SwapCharacterSprite(sprites[currentIndex]);
+            currentIndex = WrapSpriteIndex(currentIndex + 1);
+            SetSprites();
+            faceAnimator.SetTrigger("previous");
+            arrowLeft.SetTrigger("Start");
         }
 
-        private void SwapCharacterSprite(Sprite characterObject)
+        private void SetSprites()
         {
-            spriteRenderer.sprite = characterObject;
+            previousFace.sprite = GetCharacterSprite(currentIndex + 1); 
+            currentface.sprite = GetCharacterSprite(currentIndex); 
+            nextFace.sprite = GetCharacterSprite(currentIndex - 1);
+        }
+
+        private Sprite GetCharacterSprite(int i)
+        {
+            return sprites[WrapSpriteIndex(i)];
+        }
+
+        private int WrapSpriteIndex(int index)
+        {
+            if (index >= 0)
+                return index % sprites.Length;
+            else return (sprites.Length - 1) - ((-index) % sprites.Length);
         }
 
         public void GoToPreviousScene()

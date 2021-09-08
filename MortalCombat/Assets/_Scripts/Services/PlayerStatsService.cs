@@ -1,3 +1,4 @@
+using Siren;
 using System.Collections.Generic;
 using System.Linq;
 using ToolBox.Services;
@@ -29,9 +30,7 @@ namespace MortalCombat
 
         public void ResetKills()
         {
-            var keys = playerKills.Keys.ToArray();
-            foreach (var key in keys)
-                playerKills[key] = 0;
+            playerKills.SetAll(0);
         }
     }
 }

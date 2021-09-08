@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Siren
 {
-	public static class ArrayUtility
+    public static class ArrayUtility
 	{
 		/// <summary>
 		/// Filter an collection of objects on a specific type
