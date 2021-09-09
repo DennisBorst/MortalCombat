@@ -10,34 +10,56 @@ namespace MortalCombat
 {
     public class OutroOverlay : DependencyBehavior
     {
-        [SerializeField] TMPro.TMP_Text text = null;
         [SerializeField] Animator animator = null;
-        [SerializeField] private string format = "Player {0} has won!";
+        [SerializeField] WinplayerPanel playerPanel1 = null;
+        [SerializeField] WinplayerPanel playerPanel2 = null;
+
+        private int winningPlayerId = -1;
+
+
         [Dependency] private PlayerStatsService playerStats;
+
 
         protected override void Awake()
         {
             base.Awake();
             GlobalEvents.AddListener<PlayerWinMessage>(OnPlayerWin);
             gameObject.SetActive(false);
+
+            playerPanel1.OnAnimationsCompleted += Anim_ClosePanels;
+            playerPanel2.OnAnimationsCompleted += Anim_ClosePanels;
         }
 
         private void OnDestroy()
         {
+            
             GlobalEvents.RemoveListener<PlayerWinMessage>(OnPlayerWin);
         }
 
         private void OnPlayerWin(PlayerWinMessage obj)
         {
             gameObject.SetActive(true);
-            text.text = string.Format(format, obj.playerId + 1);
+            winningPlayerId = obj.playerId;
             animator.SetTrigger("start");
-            playerStats.Addkills(obj.playerId, 1);
         }
 
         public void GoToMainMenu()
         {
+            playerStats.Addkills(winningPlayerId, 1);
             SceneManager.LoadScene("Character Select", LoadSceneMode.Single);
+        }
+
+        // called by animator
+        public void Anim_PlayPanelAnimations()
+        {
+            playerPanel1.PlayAnimation();
+            playerPanel2.PlayAnimation();
+        }
+
+        // called by animator
+        public void Anim_ClosePanels()
+        {
+            animator.SetTrigger("close");
         }
     }
 }

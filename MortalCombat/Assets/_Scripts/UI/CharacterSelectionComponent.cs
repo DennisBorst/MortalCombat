@@ -21,6 +21,8 @@ namespace MortalCombat
         [SerializeField] Animator arrowLeft;
         [SerializeField] Animator arrowRight;
 
+        [SerializeField] OutroAnimationEventListener listener;
+        
         [SerializeField] TMPro.TMP_Text text;
 
         [Dependency] PlayerStatsService playerStats;
@@ -28,6 +30,7 @@ namespace MortalCombat
 
         private int currentIndex;
         private bool ready;
+        private bool sentReady;
 
         protected override void Awake()
         {
@@ -36,6 +39,8 @@ namespace MortalCombat
 
         public void Start()
         {
+            listener.OnAnimationCompleted += SendPlayerReady;
+
             currentIndex = PlayerConfiguration.Instance.GetSelectedIndex(playerId);
             SetSprites();
             text.text = "PLAYER " + (playerId + 1);
@@ -56,7 +61,6 @@ namespace MortalCombat
 
                     ready = true;
                     PlayerConfiguration.Instance.SetSelectedIndex(playerId, currentIndex);
-                    GlobalEvents.SendMessage(new PlayerReady(playerId));
                 }
 
                 if (input.Down(playerId, "Back"))
@@ -70,9 +74,18 @@ namespace MortalCombat
                 {
                     mainAnimator.SetTrigger("unready");
                     ready = false;
-                    GlobalEvents.SendMessage(new PlayerUnready(playerId));
+
+                    if (sentReady)
+                        GlobalEvents.SendMessage(new PlayerUnready(playerId));
+                    sentReady = false;
                 }
             }
+        }
+
+        public void SendPlayerReady()
+        {
+            sentReady = true;
+            GlobalEvents.SendMessage(new PlayerReady(playerId));
         }
 
         private void Next()

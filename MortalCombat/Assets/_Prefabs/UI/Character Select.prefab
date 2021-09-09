@@ -627,6 +627,7 @@ MonoBehaviour:
   faceAnimator: {fileID: 4001139341641117827}
   arrowLeft: {fileID: 3280059710622121129}
   arrowRight: {fileID: 6817073359885540750}
+  listener: {fileID: 5570301719580243085}
   text: {fileID: 1562150901243338435}
 --- !u!1 &4617984267961131885
 GameObject:
@@ -784,6 +785,7 @@ GameObject:
   - component: {fileID: 2753051484741611142}
   - component: {fileID: 5187189378339033588}
   - component: {fileID: 745973468757032458}
+  - component: {fileID: 5570301719580243085}
   m_Layer: 5
   m_Name: Container
   m_TagString: Untagged
@@ -895,6 +897,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5570301719580243085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5336253958691236306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e02f0274cd4edd45a30c038e9d5a9e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6923289585790541551
 GameObject:
   m_ObjectHideFlags: 0
