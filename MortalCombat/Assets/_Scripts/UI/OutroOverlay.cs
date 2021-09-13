@@ -24,10 +24,17 @@ namespace MortalCombat
         {
             base.Awake();
             GlobalEvents.AddListener<PlayerWinMessage>(OnPlayerWin);
-            gameObject.SetActive(false);
+
+            StartCoroutine(DelaySetInactive());
 
             playerPanel1.OnAnimationsCompleted += Anim_ClosePanels;
             playerPanel2.OnAnimationsCompleted += Anim_ClosePanels;
+        }
+
+        protected IEnumerator DelaySetInactive()
+        {
+            yield return null;
+            gameObject.SetActive(false);
         }
 
         private void OnDestroy()
