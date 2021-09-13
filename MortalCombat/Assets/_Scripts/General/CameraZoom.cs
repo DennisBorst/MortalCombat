@@ -37,7 +37,6 @@ public class CameraZoom : MonoBehaviour
 
     private void Zoom()
     {
-        Debug.Log(GetGreatestDistance());
         float newZoom = Mathf.Lerp(m_MaxZoom, m_MinZoom, GetGreatestDistance() / m_ZoomLimiter);
         cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, newZoom, Time.deltaTime);
     }
