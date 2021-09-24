@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace ToolBox.Input
 {
-
     public class UnityControllerInput : BaseInputProvider
     {
         public readonly string[] _availableInputs = new[]

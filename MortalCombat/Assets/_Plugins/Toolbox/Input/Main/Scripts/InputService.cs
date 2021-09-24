@@ -1,7 +1,6 @@
 ﻿using ToolBox.Services;
 using System.Linq;
 using UnityEngine;
-using ToolBox.Injection;
 using System.Collections.Generic;
 
 namespace ToolBox.Input
@@ -15,6 +14,7 @@ namespace ToolBox.Input
             new UnityControllerInput(),
         };
 
+        InputBinding[] requiredBindings = DefaultBindings.bindings;
         InputBinding[] bindings = DefaultBindings.bindings;
 
         internal Dictionary<string, float> previousValues = new Dictionary<string, float>();
