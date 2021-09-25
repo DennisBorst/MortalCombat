@@ -6,7 +6,7 @@ namespace ToolBox.Input
 {
     public class KeyboardInputProvider : BaseInputProvider
     {
-        public override string Name => "Keyboard";
+        public override ControllerType DeviceType => ControllerType.Keyboard;
         public override string[] AvailableInputs => Enum.GetNames(typeof(KeyCode));
         public override Action<int> OnDisconnect => null;
         public override Action<int> OnConnect => null;

@@ -5,7 +5,7 @@ namespace ToolBox.Input
 {
     public abstract class BaseInputProvider
     {
-        public abstract string Name { get; }
+        public abstract ControllerType DeviceType { get; }
         public abstract string[] AvailableInputs { get; }
 
         public abstract Action<int> OnDisconnect { get; }

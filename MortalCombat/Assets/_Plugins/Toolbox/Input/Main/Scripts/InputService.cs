@@ -2,26 +2,26 @@
 using System.Linq;
 using UnityEngine;
 using System.Collections.Generic;
+using ToolBox.Injection;
 
 namespace ToolBox.Input
 {
     [DefaultExecutionOrder(-100)]
     public class InputService : DependencyBehavior, IService
     {
+        [Dependency] InputBindingManager bindingManager;
+
         BaseInputProvider[] inputProviders = new BaseInputProvider[]
         {
             new KeyboardInputProvider(),
             new UnityControllerInput(),
         };
 
-        InputBinding[] requiredBindings = DefaultBindings.bindings;
-        InputBinding[] bindings = DefaultBindings.bindings;
-
         internal Dictionary<string, float> previousValues = new Dictionary<string, float>();
 
         public void LateUpdate()
         {
-            var inputbindings = bindings.GroupBy(x => x.Name + x.ControlScheme + x.Player);
+            var inputbindings = bindingManager.GetAllBindings().GroupBy(x => x.Name + x.ControlScheme + x.Player);
 
             foreach (var item in inputbindings)
             {
@@ -48,16 +48,12 @@ namespace ToolBox.Input
             float max = 0;
             foreach (var item in applicableBindings)
             {
-                if (inputProviders.TryFindFirst(x => x.Name == item.DeviceName
+                if (inputProviders.TryFindFirst(x => x.DeviceType == item.DeviceType
                     && x.AvailableInputs.Contains(item.DeviceInputName),
                     out BaseInputProvider provider))
                 {
 
                     float value = provider.GetValue(item);
-
-                    if (item.Log)
-                        UnityEngine.Debug.Log($"[{nameof(InputService)}] {item.Name} - {item.DeviceInputName}: {value}");
-
                     max = Mathf.Max(max, value);
                 }
             }
@@ -67,7 +63,7 @@ namespace ToolBox.Input
 
         private IEnumerable<InputBinding> GetApplicableBindings(int player, string inputName)
         {
-            return bindings.Where(x => x.Name == inputName
+            return bindingManager.GetAllBindings().Where(x => x.Name == inputName
                 && x.Player == player);
         }
 

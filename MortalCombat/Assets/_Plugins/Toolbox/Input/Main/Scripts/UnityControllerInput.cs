@@ -16,13 +16,10 @@ namespace ToolBox.Input
             "ShoulderL", "ShoulderR"                    // Shoulder Buttons
         };
 
-        public override string Name => "XBox";
-
         public override string[] AvailableInputs => _availableInputs;
-
         public override Action<int> OnDisconnect => throw new NotImplementedException();
-
         public override Action<int> OnConnect => throw new NotImplementedException();
+        public override ControllerType DeviceType => ControllerType.Xbox;
 
         public override float GetValue(InputBinding binding)
         {
