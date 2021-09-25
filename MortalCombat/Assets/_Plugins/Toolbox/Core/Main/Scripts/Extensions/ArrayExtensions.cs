@@ -45,6 +45,80 @@ namespace ToolBox
                 src[i].Fill(value);
         }
 
+        public static int GetRecursiveLength<T>(this T[][] src)
+        {
+#if DEBUG
+            if (src == null)
+                throw new ArgumentException("src");
+#endif
+            int length = 0;
+            for (int i = 0; i < src.Length; i++)
+            {
+#if DEBUG
+                if (src[i] == null)
+                {
+                    UnityEngine.Debug.LogError($"Element {i} in source array was null. Ignoring in debug.");
+                    continue;
+                }
+#endif
+                length += src[i].Length;
+            }
+
+            return length;
+        }
+
+        public static int GetRecursiveLength<T>(this T[][][] src)
+        {
+#if DEBUG
+            if (src == null)
+                throw new ArgumentException("src");
+#endif
+            int length = 0;
+            for (int i = 0; i < src.Length; i++)
+            {
+#if DEBUG
+                if (src[i] == null)
+                {
+                    UnityEngine.Debug.LogError($"Element at {i} in source array was null. Ignoring in debug.");
+                    continue;
+                }
+#endif
+                for (int j = 0; j < length; j++)
+                {
+#if DEBUG
+                    if (src[i][j] == null)
+                    {
+                        UnityEngine.Debug.LogError($"Element at {i}, {j}, in source array was null. Ignoring in debug.");
+                        continue;
+                    }
+#endif
+                    length += src[i][j].Length;
+                }
+            }
+
+            return length;
+        }
+
+
+        public static T[] Collapse<T>(this T[][] src)
+        {
+#if DEBUG
+            if (src == null)
+                throw new ArgumentException("src");
+#endif
+
+            T[] elements = new T[src.GetRecursiveLength()];
+            
+            int index = 0;
+            for (int i = 0; i < src.Length; i++)
+                for (int j = 0; j < src[i].Length; j++)
+                    elements[index++] = src[i][j];
+
+            return elements;
+
+        }
+
+
         public static void Each<T>(this T[] src, Action<T> function)
         {
 #if DEBUG
@@ -294,7 +368,7 @@ namespace ToolBox
             return total;
         }
 
-		public static TimeSpan Average(this TimeSpan[] src)
+        public static TimeSpan Average(this TimeSpan[] src)
 		{
 			long ticks = 0;
 			src.Each(x => ticks += x.Ticks);
@@ -488,6 +562,12 @@ namespace ToolBox
                 if (max > src[i])
                     max = src[i];
             return max;
+        }
+
+
+        public static bool HasElements<T>(T[] src)
+        {
+            return src != null && src.Length > 0;
         }
     }
 }
