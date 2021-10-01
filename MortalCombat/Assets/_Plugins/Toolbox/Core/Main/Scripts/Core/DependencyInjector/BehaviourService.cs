@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -14,9 +15,15 @@ namespace ToolBox.Services
         public GlobalBehaviourService()
         {
             _GameObject = new GameObject("Toolbox Service Behaviors");
-            Object.DontDestroyOnLoad(_GameObject);
+
+#if UNITY_EDITOR
+			if (EditorApplication.isPlaying)
+				Object.DontDestroyOnLoad(_GameObject);
             _GameObject.hideFlags = HideFlags.DontSave;
             _GameObject.isStatic = true;
+#else
+
+#endif
         }
 
 		public object GetBehavior(Type type)

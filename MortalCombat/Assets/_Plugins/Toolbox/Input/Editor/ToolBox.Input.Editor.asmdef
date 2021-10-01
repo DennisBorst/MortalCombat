@@ -1,0 +1,17 @@
+{
+    "name": "ToolBox.Input.Editor",
+    "rootNamespace": "ToolBox.Input.Editor",
+    "references": [
+        "GUID:f6029811d8b8f6d458192b89dd3a2cce",
+        "GUID:7ed3132acfcc7654caad843282f240d3"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

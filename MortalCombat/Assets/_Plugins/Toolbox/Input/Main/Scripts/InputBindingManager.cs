@@ -8,10 +8,14 @@ namespace ToolBox.Input
     {
         private List<InputBinding> bindings = null;
 
+        public InputBindings LoadAsset()
+        {
+            return Resources.Load<InputBindings>("InputBindings");
+        }
+
         public void Load()
         {
-            InputBindings savedInputBindings = Resources.Load<InputBindings>("InputBindings");
-            bindings = new List<InputBinding>(savedInputBindings.bindings);
+            bindings = new List<InputBinding>(LoadAsset().bindings);
         }
 
         public InputBinding[] GetAllBindings()

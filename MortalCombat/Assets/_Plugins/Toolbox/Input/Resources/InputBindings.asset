@@ -12,4 +12,368 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce3bac9131486424faaa453e2620ec2e, type: 3}
   m_Name: InputBindings
   m_EditorClassIdentifier: 
-  bindings: []
+  bindings:
+  - Name: LeftUI
+    ControlScheme: 
+    Player: 0
+    DeviceInputName: ShoulderL
+    DeviceType: 1
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: RightUI
+    ControlScheme: 
+    Player: 0
+    DeviceInputName: ShoulderR
+    DeviceType: 1
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: Left
+    ControlScheme: 
+    Player: 0
+    DeviceInputName: LeftX-
+    DeviceType: 1
+    DeviceIndex: 0
+    DeadZone: 0.2
+  - Name: Right
+    ControlScheme: 
+    Player: 0
+    DeviceInputName: LeftX+
+    DeviceType: 1
+    DeviceIndex: 0
+    DeadZone: 0.2
+  - Name: Up
+    ControlScheme: 
+    Player: 0
+    DeviceInputName: LeftY-
+    DeviceType: 1
+    DeviceIndex: 0
+    DeadZone: 0.2
+  - Name: Down
+    ControlScheme: 
+    Player: 0
+    DeviceInputName: LeftY+
+    DeviceType: 1
+    DeviceIndex: 0
+    DeadZone: 0.2
+  - Name: Jump
+    ControlScheme: 
+    Player: 0
+    DeviceInputName: A
+    DeviceType: 1
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: Confirm
+    ControlScheme: 
+    Player: 0
+    DeviceInputName: A
+    DeviceType: 1
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: Throw
+    ControlScheme: 
+    Player: 0
+    DeviceInputName: X
+    DeviceType: 1
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: Punch
+    ControlScheme: 
+    Player: 0
+    DeviceInputName: B
+    DeviceType: 1
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: Back
+    ControlScheme: 
+    Player: 0
+    DeviceInputName: B
+    DeviceType: 1
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: Left
+    ControlScheme: 
+    Player: 0
+    DeviceInputName: LeftArrow
+    DeviceType: 0
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: Right
+    ControlScheme: 
+    Player: 0
+    DeviceInputName: RightArrow
+    DeviceType: 0
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: Up
+    ControlScheme: 
+    Player: 0
+    DeviceInputName: UpArrow
+    DeviceType: 0
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: Down
+    ControlScheme: 
+    Player: 0
+    DeviceInputName: DownArrow
+    DeviceType: 0
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: Back
+    ControlScheme: 
+    Player: 0
+    DeviceInputName: Backspace
+    DeviceType: 0
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: Confirm
+    ControlScheme: 
+    Player: 0
+    DeviceInputName: Return
+    DeviceType: 0
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: Jump
+    ControlScheme: 
+    Player: 0
+    DeviceInputName: Keypad0
+    DeviceType: 0
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: Jump
+    ControlScheme: 
+    Player: 0
+    DeviceInputName: UpArrow
+    DeviceType: 0
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: Throw
+    ControlScheme: 
+    Player: 0
+    DeviceInputName: Keypad2
+    DeviceType: 0
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: Punch
+    ControlScheme: 
+    Player: 0
+    DeviceInputName: Keypad1
+    DeviceType: 0
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: LeftUI
+    ControlScheme: 
+    Player: 1
+    DeviceInputName: ShoulderL
+    DeviceType: 1
+    DeviceIndex: 1
+    DeadZone: 0
+  - Name: RightUI
+    ControlScheme: 
+    Player: 1
+    DeviceInputName: ShoulderR
+    DeviceType: 1
+    DeviceIndex: 1
+    DeadZone: 0
+  - Name: Left
+    ControlScheme: 
+    Player: 1
+    DeviceInputName: LeftX-
+    DeviceType: 1
+    DeviceIndex: 1
+    DeadZone: 0.2
+  - Name: Right
+    ControlScheme: 
+    Player: 1
+    DeviceInputName: LeftX+
+    DeviceType: 1
+    DeviceIndex: 1
+    DeadZone: 0.2
+  - Name: Up
+    ControlScheme: 
+    Player: 1
+    DeviceInputName: LeftY-
+    DeviceType: 1
+    DeviceIndex: 1
+    DeadZone: 0.2
+  - Name: Down
+    ControlScheme: 
+    Player: 1
+    DeviceInputName: LeftY+
+    DeviceType: 1
+    DeviceIndex: 1
+    DeadZone: 0.2
+  - Name: Jump
+    ControlScheme: 
+    Player: 1
+    DeviceInputName: A
+    DeviceType: 1
+    DeviceIndex: 1
+    DeadZone: 0
+  - Name: Confirm
+    ControlScheme: 
+    Player: 1
+    DeviceInputName: A
+    DeviceType: 1
+    DeviceIndex: 1
+    DeadZone: 0
+  - Name: Throw
+    ControlScheme: 
+    Player: 1
+    DeviceInputName: X
+    DeviceType: 1
+    DeviceIndex: 1
+    DeadZone: 0
+  - Name: Punch
+    ControlScheme: 
+    Player: 1
+    DeviceInputName: B
+    DeviceType: 1
+    DeviceIndex: 1
+    DeadZone: 0
+  - Name: Back
+    ControlScheme: 
+    Player: 1
+    DeviceInputName: B
+    DeviceType: 1
+    DeviceIndex: 1
+    DeadZone: 0
+  - Name: Left
+    ControlScheme: 
+    Player: 1
+    DeviceInputName: A
+    DeviceType: 0
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: Right
+    ControlScheme: 
+    Player: 1
+    DeviceInputName: D
+    DeviceType: 0
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: Up
+    ControlScheme: 
+    Player: 1
+    DeviceInputName: W
+    DeviceType: 0
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: Down
+    ControlScheme: 
+    Player: 1
+    DeviceInputName: S
+    DeviceType: 0
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: Jump
+    ControlScheme: 
+    Player: 1
+    DeviceInputName: F
+    DeviceType: 0
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: Jump
+    ControlScheme: 
+    Player: 1
+    DeviceInputName: W
+    DeviceType: 0
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: Throw
+    ControlScheme: 
+    Player: 1
+    DeviceInputName: H
+    DeviceType: 0
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: Punch
+    ControlScheme: 
+    Player: 1
+    DeviceInputName: G
+    DeviceType: 0
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: Back
+    ControlScheme: 
+    Player: 1
+    DeviceInputName: G
+    DeviceType: 0
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: Confirm
+    ControlScheme: 
+    Player: 1
+    DeviceInputName: F
+    DeviceType: 0
+    DeviceIndex: 0
+    DeadZone: 0
+  - Name: Left
+    ControlScheme: 
+    Player: 2
+    DeviceInputName: LStickLeft
+    DeviceType: 1
+    DeviceIndex: 2
+    DeadZone: 0
+  - Name: Right
+    ControlScheme: 
+    Player: 2
+    DeviceInputName: LStickRight
+    DeviceType: 1
+    DeviceIndex: 2
+    DeadZone: 0
+  - Name: Jump
+    ControlScheme: 
+    Player: 2
+    DeviceInputName: A
+    DeviceType: 1
+    DeviceIndex: 2
+    DeadZone: 0
+  - Name: Throw
+    ControlScheme: 
+    Player: 2
+    DeviceInputName: X
+    DeviceType: 1
+    DeviceIndex: 2
+    DeadZone: 0
+  - Name: Punch
+    ControlScheme: 
+    Player: 2
+    DeviceInputName: B
+    DeviceType: 1
+    DeviceIndex: 2
+    DeadZone: 0
+  - Name: Left
+    ControlScheme: 
+    Player: 3
+    DeviceInputName: LStickLeft
+    DeviceType: 1
+    DeviceIndex: 3
+    DeadZone: 0
+  - Name: Right
+    ControlScheme: 
+    Player: 3
+    DeviceInputName: LStickRight
+    DeviceType: 1
+    DeviceIndex: 3
+    DeadZone: 0
+  - Name: Jump
+    ControlScheme: 
+    Player: 3
+    DeviceInputName: A
+    DeviceType: 1
+    DeviceIndex: 3
+    DeadZone: 0
+  - Name: Throw
+    ControlScheme: 
+    Player: 3
+    DeviceInputName: X
+    DeviceType: 1
+    DeviceIndex: 3
+    DeadZone: 0
+  - Name: Punch
+    ControlScheme: 
+    Player: 3
+    DeviceInputName: B
+    DeviceType: 1
+    DeviceIndex: 3
+    DeadZone: 0
