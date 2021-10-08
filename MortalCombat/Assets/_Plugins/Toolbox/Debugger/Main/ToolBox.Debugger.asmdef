@@ -1,0 +1,16 @@
+{
+    "name": "ToolBox.Debugger",
+    "rootNamespace": "ToolBox.Debugger",
+    "references": [
+        "GUID:7ed3132acfcc7654caad843282f240d3"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
