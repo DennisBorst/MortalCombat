@@ -71,11 +71,6 @@ namespace ToolBox.Injection
             method.Invoke(target, parameters);
         }
 
-        public object[] FetchInstancesFromConstructor(in ConstructorInfo info)
-        {
-            return FetchInstances(info.GetParameters());
-        }
-
         public object[] FetchInstances(in ParameterInfo[] parameters)
         {
             object[] parameterInstances = new object[parameters.Length];
