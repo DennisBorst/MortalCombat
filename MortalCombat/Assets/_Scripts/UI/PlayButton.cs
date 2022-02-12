@@ -13,8 +13,6 @@ namespace MortalCombat
             button.onClick.AddListener(() =>
             {
                 SceneManager.LoadScene("Character Select", LoadSceneMode.Single);
-                PlayerPrefs.SetInt("ScorePlayerOne", 0);
-                PlayerPrefs.SetInt("ScorePlayerTwo", 0);
             });
         }
     }
