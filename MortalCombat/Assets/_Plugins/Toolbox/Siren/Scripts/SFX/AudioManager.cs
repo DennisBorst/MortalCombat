@@ -54,6 +54,12 @@ namespace Siren
 
         private AudioAsset ResolveAsset(AudioEvent audioEvent)
         {
+            if (string.IsNullOrEmpty(audioEvent.Identifier))
+            {
+                AudioLog.Warning("Tried to resolve an audio asset with no identifier.");
+                return null;
+            }
+
 			AudioAsset asset = null;
 			for (int i = 0; i < _Libraries.Length; i++)
 	        {
