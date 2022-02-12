@@ -18,11 +18,13 @@ namespace MortalCombat
         [SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
         [SerializeField] private float m_ShootCooldown;
         [SerializeField] private float m_MeleeCooldown;
+        /*[HideInInspector] */public bool invincible;
 
         [Header("NeedAssignment")]
         [SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
         [SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
         [SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
+        [SerializeField] private GameObject m_playerObject;
         [SerializeField] private Animator m_anim;
         [SerializeField] private GameObject m_Projectile;
         [SerializeField] private Transform m_FirePoint;
@@ -52,6 +54,10 @@ namespace MortalCombat
         private bool m_CanPunch;
         [SerializeField] private bool m_InputAvaible;
         [SerializeField] private bool m_FlipCharacterOnStart;
+        private SpriteRenderer[] spriteRenderers;
+        private Color colorHit = new Color32(150,0,0,255);
+        private Color colorHit2 = new Color32(255,0,0,255);
+        private Color colorNormal = new Color32(255, 255, 255, 255);
 
         protected override void Awake()
         {
@@ -64,6 +70,8 @@ namespace MortalCombat
 
             if (m_FlipCharacterOnStart)
                 Flip();
+
+            spriteRenderers = m_playerObject.GetComponentsInChildren<SpriteRenderer>();
 
             GlobalEvents.AddListener<GameStartMessage>(OnGameStart);
             GlobalEvents.AddListener<PlayerWinMessage>(OnPlayerWin);
@@ -163,6 +171,7 @@ namespace MortalCombat
                 projectile.GetComponent<Projectile>().m_CharacterID = GetComponent<CharacterID>();
                 GlobalEvents.SendMessage(new PlayerBulletMessage(m_ControllerID, m_CanShoot));
             }
+
         }
 
         public void Move(float move, bool jump)
@@ -217,6 +226,7 @@ namespace MortalCombat
 
         public void Hit()
         {
+
             AnimState(4, true);
         }
 
@@ -261,6 +271,56 @@ namespace MortalCombat
         {
             timer -= Time.deltaTime;
             return timer;
+        }
+
+        private void InvincibilityEffect(Color color, float alpha)
+        {
+            color.a = alpha;
+
+            for (int i = 0; i < spriteRenderers.Length; i++)
+            {
+                spriteRenderers[i].color = color;
+            }
+        }
+
+        public void ActivateInvincibleFrames(float time)
+        {
+            StartCoroutine(InvincibilityFrames(time));
+        }
+
+        private IEnumerator InvincibilityFrames(float time)
+        {
+            invincible = true;
+            //InvincibilityEffect(0.3f);
+            yield return new WaitForSeconds(time);
+            invincible = false;
+            //InvincibilityEffect(1f);
+        }
+        public IEnumerator HitFrames(float duration, float fadeOutDuration = 0.1f)
+        {
+            float timeDevided = duration/4;
+            invincible = true;
+            InvincibilityEffect(colorHit, 255);
+            yield return new WaitForSeconds(timeDevided);
+            InvincibilityEffect(colorHit2, 255);
+            yield return new WaitForSeconds(timeDevided);
+            InvincibilityEffect(colorHit, 255);
+            yield return new WaitForSeconds(timeDevided);
+            InvincibilityEffect(colorNormal, 255);
+
+            float startTime = Time.time;
+            float endTime = startTime + fadeOutDuration;
+
+            while (Time.time < endTime)
+            {
+                Color color = Color.Lerp(colorHit, colorNormal, (Time.time - startTime) / fadeOutDuration);
+                InvincibilityEffect(color, 1);
+                yield return null;
+            }
+
+            InvincibilityEffect(colorNormal, 1);
+
+            invincible = false;
         }
     }
 }

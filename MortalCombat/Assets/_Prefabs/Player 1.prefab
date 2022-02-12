@@ -71,11 +71,13 @@ MonoBehaviour:
   m_AirControl: 1
   m_ShootCooldown: 0.7
   m_MeleeCooldown: 0.9
+  invincible: 0
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 64
   m_GroundCheck: {fileID: 4598528202714393665}
   m_CeilingCheck: {fileID: 4598528202828448939}
+  m_playerObject: {fileID: 7910301030250014217}
   m_anim: {fileID: 5991632288716955128}
   m_Projectile: {fileID: 6701204292452368714, guid: a7d438f77f0d9e84584fe99a99982706, type: 3}
   m_FirePoint: {fileID: 7816837410655422381}
@@ -98,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  recoverTime: 0.2
 --- !u!50 &4598528201690325259
 Rigidbody2D:
   serializedVersion: 4

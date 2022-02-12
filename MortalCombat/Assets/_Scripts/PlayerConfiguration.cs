@@ -9,6 +9,7 @@ namespace MortalCombat
         public static PlayerConfiguration Instance;
 
         [SerializeField] private GameObject[] playerskins;
+        [SerializeField] private Sprite[] playerSprites;
         private Dictionary<int, int> SelectedIndexPerPlayer = new Dictionary<int, int>(4);
 
         public void SetSelectedIndex(int playerId, int index)
@@ -27,6 +28,11 @@ namespace MortalCombat
         public GameObject GetPlayerSkin(int playerId)
         {
             return playerskins[SelectedIndexPerPlayer[playerId]];
+        }
+
+        public Sprite GetPlayerIcon(int playerId)
+        {
+            return playerSprites[SelectedIndexPerPlayer[playerId]];
         }
 
         private void Awake()

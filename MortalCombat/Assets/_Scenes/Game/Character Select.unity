@@ -1279,6 +1279,13 @@ MonoBehaviour:
   - {fileID: 5075196268775072624, guid: 067ab6f075022e549a81e098d67a21b1, type: 3}
   - {fileID: 5075196268775072624, guid: fbeb10bbf2280c14f829bf29ef2e1304, type: 3}
   - {fileID: 5075196268775072624, guid: be7124bc6a944e14a81da97b03c47969, type: 3}
+  playerSprites:
+  - {fileID: 21300000, guid: 7d4d6bff009bf61468f44b7d39b45ebb, type: 3}
+  - {fileID: 21300000, guid: 10d3708cdaaf1f244823b0648ec4491a, type: 3}
+  - {fileID: 21300000, guid: 1fd98541fb5e4f04f8c50a0ceef23fc8, type: 3}
+  - {fileID: 21300000, guid: 121a663a1ba502842831097b841d3aeb, type: 3}
+  - {fileID: 21300000, guid: 4cc9fa22d73a2e6489fd6967fabb29b0, type: 3}
+  - {fileID: 21300000, guid: 46fdad09113247a4d9aabfcb1d246fca, type: 3}
 --- !u!4 &1505197908
 Transform:
   m_ObjectHideFlags: 0

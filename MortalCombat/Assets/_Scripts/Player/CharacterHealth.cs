@@ -8,6 +8,7 @@ namespace MortalCombat
     public class CharacterHealth : MonoBehaviour
     {
         public float health;
+        public float recoverTime;
 
         private int m_PlayerID;
         private float m_CurrentHealth;
@@ -24,6 +25,9 @@ namespace MortalCombat
 
         public void DamageTaken(float damage)
         {
+            if (m_CharacterMovement.invincible) { return; }
+            StartCoroutine(m_CharacterMovement.HitFrames(recoverTime));
+
             m_CurrentHealth -= damage;
 
             if (m_CurrentHealth <= 0)
@@ -37,5 +41,4 @@ namespace MortalCombat
             GlobalEvents.SendMessage(new PlayerDamagedMessage(m_PlayerID, m_CurrentHealth));
         }
     }
-
 }

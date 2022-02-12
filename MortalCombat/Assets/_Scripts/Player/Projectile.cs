@@ -36,14 +36,18 @@ namespace MortalCombat
             {
                 if (collision.gameObject.GetComponent<CharacterID>().m_PlayerID == m_CharacterID.m_PlayerID) { return; }
                 CharacterHealth health = collision.gameObject.GetComponent<CharacterHealth>();
+                CharacterMovement characterMovement = collision.gameObject.GetComponent<CharacterMovement>();
                 Instantiate(hitEnemyParticle, collision.gameObject.transform.position, Quaternion.identity);
                 Camera.main.transform.DOShakePosition(.4f, .5f, 20, 90, false, true);
 
-                Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
-                float signX = (m_CharacterID.gameObject.transform.position.x < collision.gameObject.transform.position.x) ? 1.0f : -1.0f;
-                float signY = (m_CharacterID.gameObject.transform.position.y < collision.gameObject.transform.position.y) ? -0.5f : 0.5f;
-                Vector2 v2 = new Vector2(signX, signY);
-                rb.AddForce(v2 * m_Force);
+                if (!characterMovement.invincible)
+                {
+                    Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
+                    float signX = (m_CharacterID.gameObject.transform.position.x < collision.gameObject.transform.position.x) ? 1.0f : -1.0f;
+                    float signY = (m_CharacterID.gameObject.transform.position.y < collision.gameObject.transform.position.y) ? -0.5f : 0.5f;
+                    Vector2 v2 = new Vector2(signX, signY);
+                    rb.AddForce(v2 * m_Force);
+                }
 
                 if (health != null)
                 {
