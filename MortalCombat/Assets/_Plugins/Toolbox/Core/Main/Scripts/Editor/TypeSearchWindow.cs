@@ -123,8 +123,6 @@ namespace ToolBox.Editor
             GUI.SetNextControlName("SearchBar");
             var newSearchString = GUILayout.TextField(searchString, GUI.skin.FindStyle("ToolbarSeachTextField"));
 
-            searchString = newSearchString;
-
             if (FirstTimeFocus)
             {
                 FirstTimeFocus = false;
@@ -138,6 +136,8 @@ namespace ToolBox.Editor
                 typeRects = new Rect[filteredTypes.Length];
                 selectedIndex = -1;
             }
+
+            searchString = newSearchString;
         }
 
         private void SelectType(Type scriptableObject)
