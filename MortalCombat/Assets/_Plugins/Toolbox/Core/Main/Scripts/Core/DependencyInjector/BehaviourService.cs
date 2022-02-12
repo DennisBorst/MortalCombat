@@ -22,9 +22,9 @@ namespace ToolBox.Services
             _GameObject.hideFlags = HideFlags.DontSave;
             _GameObject.isStatic = true;
 #else
-
+			Object.DontDestroyOnLoad(_GameObject);
 #endif
-        }
+		}
 
 		public object GetBehavior(Type type)
         {
