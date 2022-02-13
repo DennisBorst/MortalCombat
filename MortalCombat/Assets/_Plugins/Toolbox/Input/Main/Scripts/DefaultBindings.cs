@@ -21,7 +21,8 @@ namespace ToolBox.Input
             new InputBinding {Player = 0, Name = "Confirm",  DeviceType = ControllerType.Xbox, DeviceIndex = 0, DeviceInputName = "A"},
             new InputBinding {Player = 0, Name = "Throw",    DeviceType = ControllerType.Xbox, DeviceIndex = 0, DeviceInputName = "X"},
             new InputBinding {Player = 0, Name = "Punch",    DeviceType = ControllerType.Xbox, DeviceIndex = 0, DeviceInputName = "B"},
-            new InputBinding {Player = 0, Name = "Dash",     DeviceType = ControllerType.Xbox, DeviceIndex = 0, DeviceInputName = "ShoulderR"},
+            new InputBinding {Player = 0, Name = "Shield",     DeviceType = ControllerType.Xbox, DeviceIndex = 0, DeviceInputName = "TriggerL"},
+            new InputBinding {Player = 0, Name = "Dash",     DeviceType = ControllerType.Xbox, DeviceIndex = 0, DeviceInputName = "TriggerR"},
             new InputBinding {Player = 0, Name = "Back",     DeviceType = ControllerType.Xbox, DeviceIndex = 0, DeviceInputName = "B"},
 #if DEBUG
             new InputBinding {Player = 0, Name = "Left",    DeviceType = ControllerType.Keyboard, DeviceIndex = 0, DeviceInputName = KeyCode.A.ToString()},
@@ -59,7 +60,8 @@ namespace ToolBox.Input
             new InputBinding {Player = 1, Name = "Confirm", DeviceType = ControllerType.Xbox, DeviceIndex = 1, DeviceInputName = "A"},
             new InputBinding {Player = 1, Name = "Throw",   DeviceType = ControllerType.Xbox, DeviceIndex = 1, DeviceInputName = "X"},
             new InputBinding {Player = 1, Name = "Punch",   DeviceType = ControllerType.Xbox, DeviceIndex = 1, DeviceInputName = "B"},
-            new InputBinding {Player = 1, Name = "Dash",    DeviceType = ControllerType.Xbox, DeviceIndex = 1, DeviceInputName = "ShoulderR"},
+            new InputBinding {Player = 1, Name = "Shield",  DeviceType = ControllerType.Xbox, DeviceIndex = 1, DeviceInputName = "TriggerL"},
+            new InputBinding {Player = 1, Name = "Dash",    DeviceType = ControllerType.Xbox, DeviceIndex = 1, DeviceInputName = "TriggerR"},
             new InputBinding {Player = 1, Name = "Back",    DeviceType = ControllerType.Xbox, DeviceIndex = 1, DeviceInputName = "B"},
 #if DEBUG
             new InputBinding {Player = 1, Name = "Left",    DeviceType = ControllerType.Keyboard, DeviceIndex = 0, DeviceInputName = KeyCode.LeftArrow.ToString()},
@@ -80,7 +82,8 @@ namespace ToolBox.Input
             new InputBinding {Player = 2, Name = "Jump",    DeviceType = ControllerType.Xbox, DeviceIndex = 2, DeviceInputName = "A"},
             new InputBinding {Player = 2, Name = "Throw",   DeviceType = ControllerType.Xbox, DeviceIndex = 2, DeviceInputName = "X"},
             new InputBinding {Player = 2, Name = "Punch",   DeviceType = ControllerType.Xbox, DeviceIndex = 2, DeviceInputName = "B"},
-            new InputBinding {Player = 2, Name = "Dash",    DeviceType = ControllerType.Xbox, DeviceIndex = 2, DeviceInputName = "ShoulderR"},
+            new InputBinding {Player = 2, Name = "Shield",  DeviceType = ControllerType.Xbox, DeviceIndex = 2, DeviceInputName = "TriggerL"},
+            new InputBinding {Player = 2, Name = "Dash",    DeviceType = ControllerType.Xbox, DeviceIndex = 2, DeviceInputName = "TriggerR"},
         
             // ** PLAYER 4 **
             new InputBinding {Player = 3, Name = "Left",    DeviceType = ControllerType.Xbox, DeviceIndex = 3, DeviceInputName = "LStickLeft"},
@@ -88,7 +91,8 @@ namespace ToolBox.Input
             new InputBinding {Player = 3, Name = "Jump",    DeviceType = ControllerType.Xbox, DeviceIndex = 3, DeviceInputName = "A"},
             new InputBinding {Player = 3, Name = "Throw",   DeviceType = ControllerType.Xbox, DeviceIndex = 3, DeviceInputName = "X"},
             new InputBinding {Player = 3, Name = "Punch",   DeviceType = ControllerType.Xbox, DeviceIndex = 3, DeviceInputName = "B"},
-            new InputBinding {Player = 3, Name = "Dash",    DeviceType = ControllerType.Xbox, DeviceIndex = 3, DeviceInputName = "ShoulderR"},
+            new InputBinding {Player = 3, Name = "Shield",  DeviceType = ControllerType.Xbox, DeviceIndex = 3, DeviceInputName = "TriggerL"},
+            new InputBinding {Player = 3, Name = "Dash",    DeviceType = ControllerType.Xbox, DeviceIndex = 3, DeviceInputName = "TriggerR"},
         };
     }
 }

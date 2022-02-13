@@ -12,7 +12,8 @@ namespace MortalCombat
     public class CharacterMovement : DependencyBehavior
     {
         [Header("General")]
-        [SerializeField] private float m_JumpForce = 400f;                          // Amount of force added when the player jumps.
+        [SerializeField] private float m_JumpForce = 15f;                          // Amount of force added when the player jumps.
+        [SerializeField] private float m_DoubleJumpForce = 10f;                          // Amount of force added when the player jumps.
         [Range(0, 1), SerializeField] private float m_CrouchSpeed = .36f;          // Amount of maxSpeed applied to crouching movement. 1 = 100%
         [Range(0, .3f), SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
         [SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
@@ -27,6 +28,7 @@ namespace MortalCombat
         [SerializeField] private GameObject m_playerObject;
         [SerializeField] private Animator m_anim;
         [SerializeField] private GameObject m_Projectile;
+        [SerializeField] private GameObject m_Shield;
         [SerializeField] private Transform m_FirePoint;
         [SerializeField] private GameObject m_MeleeParticle;
 
@@ -47,6 +49,7 @@ namespace MortalCombat
         public class BoolEvent : UnityEvent<bool> { }
 
         private int m_ControllerID;
+        private int jumpCounter;
         private float m_hInput;
         private float m_CurrentShootCooldown;
         private float m_CurrentMeleeCooldown;
@@ -109,6 +112,9 @@ namespace MortalCombat
                 if (colliders[i].gameObject != gameObject)
                 {
                     m_Grounded = true;
+                    jumpCounter = 0;
+                    if(m_rb.velocity.y > 10)
+                        jumpCounter = 1; 
                     if (!wasGrounded)
                         OnLandEvent.Invoke();
                 }
@@ -151,7 +157,7 @@ namespace MortalCombat
 
         private void CheckInput()
         {
-            if (input.Down(m_ControllerID, "Jump") && m_Grounded)
+            if (input.Down(m_ControllerID, "Jump") && jumpCounter <= 1)
             {
                 Move(m_hInput, true);
                 AnimState(5, false);
@@ -172,6 +178,14 @@ namespace MortalCombat
                 GlobalEvents.SendMessage(new PlayerBulletMessage(m_ControllerID, m_CanShoot));
             }
 
+            if(input.Down(m_ControllerID, "Shield"))
+            {
+                m_Shield.SetActive(true);
+            }
+            else if(input.GetUp(m_ControllerID, null, "Shield"))
+            {
+                m_Shield.SetActive(false);
+            }
         }
 
         public void Move(float move, bool jump)
@@ -197,11 +211,18 @@ namespace MortalCombat
                 }
             }
             // If the player should jump...
-            if (m_Grounded && jump)
+            if (jumpCounter == 0 && jump)
             {
                 // Add a vertical force to the player.
                 m_Grounded = false;
-                m_rb.AddForce(new Vector2(0f, m_JumpForce));
+                jumpCounter += 1;
+                m_rb.velocity = Vector2.up * m_JumpForce;
+                //m_rb.AddForce(new Vector2(0f, m_JumpForce));
+            }
+            else if (jumpCounter == 1 && jump)
+            {
+                jumpCounter += 1;
+                m_rb.velocity = Vector2.up * (m_DoubleJumpForce + (m_rb.velocity.y/4f));
             }
         }
 
