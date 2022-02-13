@@ -5,32 +5,36 @@ using UnityEngine.SceneManagement;
 using ToolBox.Injection;
 using ToolBox.Input;
 using Siren;
+using UnityEngine.Serialization;
+using System.Linq;
 
 namespace MortalCombat
 {
     public class CharacterSelectionComponent : DependencyBehavior
     {
-        [SerializeField] private string AudioReady = "Menu/Confirm";
-        [SerializeField] private string AudioCancel = "Menu/Cancel";
+        [SerializeField, FormerlySerializedAs("AudioReady")] private string _AudioReady = "Menu/Confirm";
+        [SerializeField, FormerlySerializedAs("AudioCancel")] private string _AudioCancel = "Menu/Cancel";
 
-        [SerializeField] private int playerId = 0;
-        [SerializeField] Sprite[] sprites = null;
+        [SerializeField, FormerlySerializedAs("playerId")] private int _PlayerId = 0;
 
-        [SerializeField] Image currentface;
-        [SerializeField] Image previousFace;
-        [SerializeField] Image nextFace;
+        [SerializeField, FormerlySerializedAs("currentFace")] private Image _Currentface;
+        [SerializeField, FormerlySerializedAs("previousFace")] private Image _PreviousFace;
+        [SerializeField, FormerlySerializedAs("nextFace")] private Image _NextFace;
 
-        [SerializeField] Animator mainAnimator;
-        [SerializeField] Animator faceAnimator;
-        [SerializeField] Animator arrowLeft;
-        [SerializeField] Animator arrowRight;
+        [SerializeField, FormerlySerializedAs("mainAnimator")] private Animator _MainAnimator;
+        [SerializeField, FormerlySerializedAs("faceAnimator")] private Animator _FaceAnimator;
+        [SerializeField, FormerlySerializedAs("arrowLeft")] private Animator _ArrowLeft;
+        [SerializeField, FormerlySerializedAs("arrowRight")] private Animator _ArrowRight;
 
-        [SerializeField] OutroAnimationEventListener listener;
+        [SerializeField, FormerlySerializedAs("listener")] OutroAnimationEventListener _Listener;
         
-        [SerializeField] TMPro.TMP_Text text;
+        [SerializeField, FormerlySerializedAs("text")] TMPro.TMP_Text _Text;
 
-        [Dependency] PlayerStatsService playerStats;
-        [Dependency] InputService input;
+        private Sprite[] _Sprites;
+
+        [Dependency] PlayerStatsService _PlayerStats;
+        [Dependency] InputService _Input;
+        [Dependency] CharacterManagerService _CharacterManager;
 
         private int currentIndex;
         private bool ready;
@@ -39,53 +43,55 @@ namespace MortalCombat
         protected override void Awake()
         {
             base.Awake();
+            _Sprites = _CharacterManager.GetAllCharacters().Select(x => x.CharacterSelectSprite).ToArray();
+
         }
 
         public void Start()
         {
-            listener.OnAnimationCompleted += SendPlayerReady;
+            _Listener.OnAnimationCompleted += SendPlayerReady;
 
-            currentIndex = PlayerConfiguration.Instance.GetSelectedIndex(playerId);
+            currentIndex = PlayerConfiguration.Instance.GetSelectedIndex(_PlayerId);
             SetSprites();
-            text.text = "PLAYER " + (playerId + 1);
+            _Text.text = "PLAYER " + (_PlayerId + 1);
         }
 
         private void Update()
         {
             if (!ready)
             {
-                if (input.Down(playerId, "Left") || input.Down(playerId, "LeftUI"))
+                if (_Input.Down(_PlayerId, "Left") || _Input.Down(_PlayerId, "LeftUI"))
                     Previous();
-                if (input.Down(playerId, "Right") || input.Down(playerId, "RightUI"))
+                if (_Input.Down(_PlayerId, "Right") || _Input.Down(_PlayerId, "RightUI"))
                     Next();
 
-                if (input.Down(playerId, "Confirm"))
+                if (_Input.Down(_PlayerId, "Confirm"))
                 {
-                    mainAnimator.SetTrigger("ready");
-                    Audio.Play(AudioReady);
+                    _MainAnimator.SetTrigger("ready");
+                    Audio.Play(_AudioReady);
 
                     ready = true;
-                    PlayerConfiguration.Instance.SetSelectedIndex(playerId, currentIndex);
+                    PlayerConfiguration.Instance.SetSelectedIndex(_PlayerId, currentIndex);
                 }
 
-                if (input.Down(playerId, "Back"))
+                if (_Input.Down(_PlayerId, "Back"))
                 {
-                    Audio.Play(AudioCancel);
+                    Audio.Play(_AudioCancel);
                     GoToPreviousScene();
                 }
             }
             else
             {
-                if (input.Down(playerId, "Back"))
+                if (_Input.Down(_PlayerId, "Back"))
                 {
-                    mainAnimator.SetTrigger("unready");
+                    _MainAnimator.SetTrigger("unready");
                     ready = false;
 
                     if (sentReady)
-                        GlobalEvents.SendMessage(new PlayerUnready(playerId));
+                        GlobalEvents.SendMessage(new PlayerUnready(_PlayerId));
                     sentReady = false;
 
-                    Audio.Play(AudioCancel);
+                    Audio.Play(_AudioCancel);
                 }
             }
         }
@@ -93,7 +99,7 @@ namespace MortalCombat
         public void SendPlayerReady()
         {
             sentReady = true;
-            GlobalEvents.SendMessage(new PlayerReady(playerId));
+            GlobalEvents.SendMessage(new PlayerReady(_PlayerId));
         }
 
         private void Next()
@@ -101,8 +107,8 @@ namespace MortalCombat
             currentIndex = WrapSpriteIndex(currentIndex - 1);
             SetSprites();
             Audio.Play("Menu/CharacterShift");
-            faceAnimator.SetTrigger("next");
-            arrowRight.SetTrigger("Start");
+            _FaceAnimator.SetTrigger("next");
+            _ArrowRight.SetTrigger("Start");
         }
 
         private void Previous()
@@ -110,32 +116,32 @@ namespace MortalCombat
             currentIndex = WrapSpriteIndex(currentIndex + 1);
             SetSprites();
             Audio.Play("Menu/CharacterShift");
-            faceAnimator.SetTrigger("previous");
-            arrowLeft.SetTrigger("Start");
+            _FaceAnimator.SetTrigger("previous");
+            _ArrowLeft.SetTrigger("Start");
         }
 
         private void SetSprites()
         {
-            previousFace.sprite = GetCharacterSprite(currentIndex + 1); 
-            currentface.sprite = GetCharacterSprite(currentIndex); 
-            nextFace.sprite = GetCharacterSprite(currentIndex - 1);
+            _PreviousFace.sprite = GetCharacterSprite(currentIndex + 1); 
+            _Currentface.sprite = GetCharacterSprite(currentIndex); 
+            _NextFace.sprite = GetCharacterSprite(currentIndex - 1);
         }
 
         private Sprite GetCharacterSprite(int i)
         {
-            return sprites[WrapSpriteIndex(i)];
+            return _Sprites[WrapSpriteIndex(i)];
         }
 
         private int WrapSpriteIndex(int index)
         {
             if (index >= 0)
-                return index % sprites.Length;
-            else return sprites.Length - ((-index) % sprites.Length);
+                return index % _Sprites.Length;
+            else return _Sprites.Length - ((-index) % _Sprites.Length);
         }
 
         public void GoToPreviousScene()
         {
-            playerStats.ResetKills();
+            _PlayerStats.ResetKills();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
     }

@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &102043470 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4528975339063071645, guid: 7fe92f5d1296d924c892709264e7c4e8, type: 3}
+  m_PrefabInstance: {fileID: 4598528203089685356}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &156843901
 GameObject:
   m_ObjectHideFlags: 0
@@ -2583,6 +2588,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1736376163}
     m_Modifications:
+    - target: {fileID: 4598528201690325253, guid: 7fe92f5d1296d924c892709264e7c4e8, type: 3}
+      propertyPath: m_Shield
+      value: 
+      objectReference: {fileID: 102043470}
+    - target: {fileID: 4598528201690325253, guid: 7fe92f5d1296d924c892709264e7c4e8, type: 3}
+      propertyPath: m_JumpForce
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4598528201690325253, guid: 7fe92f5d1296d924c892709264e7c4e8, type: 3}
+      propertyPath: m_DoubleJumpForce
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4598528201690325256, guid: 7fe92f5d1296d924c892709264e7c4e8, type: 3}
       propertyPath: m_Name
       value: Player 1
@@ -2630,6 +2647,10 @@ PrefabInstance:
     - target: {fileID: 4598528201690325257, guid: 7fe92f5d1296d924c892709264e7c4e8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6623008891668711587, guid: 7fe92f5d1296d924c892709264e7c4e8, type: 3}
+      propertyPath: recoverTime
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fe92f5d1296d924c892709264e7c4e8, type: 3}

@@ -65,7 +65,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68208586abf20ee46b8caadf2fa775dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_JumpForce: 700
+  m_JumpForce: 15
+  m_DoubleJumpForce: 10
   m_CrouchSpeed: 0.36
   m_MovementSmoothing: 0.05
   m_AirControl: 1
@@ -80,6 +81,7 @@ MonoBehaviour:
   m_playerObject: {fileID: 7910301030250014217}
   m_anim: {fileID: 5991632288716955128}
   m_Projectile: {fileID: 6701204292452368714, guid: a7d438f77f0d9e84584fe99a99982706, type: 3}
+  m_Shield: {fileID: 4528975339063071645}
   m_FirePoint: {fileID: 7816837410655422381}
   m_MeleeParticle: {fileID: 8244991551697934964}
   OnLandEvent:
@@ -332,6 +334,11 @@ Transform:
 --- !u!95 &5991632288716955128 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 8305265567611223969, guid: 2f8e777c82e29c64bbfeeeff6b10af3a, type: 3}
+  m_PrefabInstance: {fileID: 2334191535027118681}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4528975339063071645 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2215368349697192388, guid: 2f8e777c82e29c64bbfeeeff6b10af3a, type: 3}
   m_PrefabInstance: {fileID: 2334191535027118681}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &8244991551697934964 stripped
