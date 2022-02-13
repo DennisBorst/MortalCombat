@@ -12,6 +12,8 @@ namespace MortalCombat
         [SerializeField] private GameObject character = null;
         [SerializeField] private CharacterID characterId = null;
 
+        private CharacterMovement m_characterMovement;
+
         void Awake()
         {
             if (PlayerConfiguration.Instance == null)
@@ -26,6 +28,8 @@ namespace MortalCombat
                 var obj = Instantiate(skin, character.transform, false);
                 obj.name = "CharacterObject";
                 currentSkin = obj;
+                m_characterMovement = GetComponent<CharacterMovement>();
+                m_characterMovement.m_playerObject = obj;
 
                 if (animator)
                     StartCoroutine(RebindCoroutine());

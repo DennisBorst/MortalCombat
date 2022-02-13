@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  recoverTime: 0.2
+  recoverTime: 0.5
 --- !u!50 &4598528201690325259
 Rigidbody2D:
   serializedVersion: 4
@@ -263,6 +263,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4598528201690325257}
     m_Modifications:
+    - target: {fileID: 1101628852007192500, guid: 2f8e777c82e29c64bbfeeeff6b10af3a, type: 3}
+      propertyPath: _characterMovement
+      value: 
+      objectReference: {fileID: 4598528201690325253}
     - target: {fileID: 1196878196405511290, guid: 2f8e777c82e29c64bbfeeeff6b10af3a, type: 3}
       propertyPath: m_RootOrder
       value: 0

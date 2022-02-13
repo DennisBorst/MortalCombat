@@ -25,7 +25,7 @@ namespace MortalCombat
         [SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
         [SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
         [SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
-        [SerializeField] private GameObject m_playerObject;
+        [HideInInspector] public GameObject m_playerObject;
         [SerializeField] private Animator m_anim;
         [SerializeField] private GameObject m_Projectile;
         [SerializeField] private GameObject m_Shield;
@@ -61,6 +61,8 @@ namespace MortalCombat
         private Color colorHit = new Color32(150,0,0,255);
         private Color colorHit2 = new Color32(255,0,0,255);
         private Color colorNormal = new Color32(255, 255, 255, 255);
+
+        private bool shieldUp;
 
         protected override void Awake()
         {
@@ -163,6 +165,18 @@ namespace MortalCombat
                 AnimState(5, false);
             }
 
+            if (input.Down(m_ControllerID, "Shield"))
+            {
+                ShieldActive(true);
+            }
+            else if (input.GetUp(m_ControllerID, null, "Shield"))
+            {
+                ShieldActive(false);
+            }
+
+            if (shieldUp) 
+                return;
+
             if (input.Down(m_ControllerID, "Punch") && m_CanPunch)
             {
                 m_CanPunch = false;
@@ -177,15 +191,12 @@ namespace MortalCombat
                 projectile.GetComponent<Projectile>().m_CharacterID = GetComponent<CharacterID>();
                 GlobalEvents.SendMessage(new PlayerBulletMessage(m_ControllerID, m_CanShoot));
             }
+        }
 
-            if(input.Down(m_ControllerID, "Shield"))
-            {
-                m_Shield.SetActive(true);
-            }
-            else if(input.GetUp(m_ControllerID, null, "Shield"))
-            {
-                m_Shield.SetActive(false);
-            }
+        public void ShieldActive(bool value)
+        {
+            shieldUp = value;
+            m_Shield.SetActive(value);
         }
 
         public void Move(float move, bool jump)

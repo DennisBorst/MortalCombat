@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &102043470 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4528975339063071645, guid: 7fe92f5d1296d924c892709264e7c4e8, type: 3}
-  m_PrefabInstance: {fileID: 4598528203089685356}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &156843901
 GameObject:
   m_ObjectHideFlags: 0
@@ -2020,8 +2015,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1426763130}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.18, y: 1.58, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalPosition: {x: 0, y: 2.94, z: 0}
+  m_LocalScale: {x: 2.672148, y: 2.672148, z: 0.890716}
   m_Children: []
   m_Father: {fileID: 1184075998}
   m_RootOrder: 2
@@ -2067,7 +2062,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -2
-  m_Sprite: {fileID: 21300000, guid: 16ef1e7b1a730244d9bfcaf536b40c58, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b9d142acd362bbd41a6a9fccf375e3b5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2588,18 +2583,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1736376163}
     m_Modifications:
-    - target: {fileID: 4598528201690325253, guid: 7fe92f5d1296d924c892709264e7c4e8, type: 3}
-      propertyPath: m_Shield
-      value: 
-      objectReference: {fileID: 102043470}
-    - target: {fileID: 4598528201690325253, guid: 7fe92f5d1296d924c892709264e7c4e8, type: 3}
-      propertyPath: m_JumpForce
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4598528201690325253, guid: 7fe92f5d1296d924c892709264e7c4e8, type: 3}
-      propertyPath: m_DoubleJumpForce
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 4598528201690325256, guid: 7fe92f5d1296d924c892709264e7c4e8, type: 3}
       propertyPath: m_Name
       value: Player 1
@@ -2647,10 +2630,6 @@ PrefabInstance:
     - target: {fileID: 4598528201690325257, guid: 7fe92f5d1296d924c892709264e7c4e8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6623008891668711587, guid: 7fe92f5d1296d924c892709264e7c4e8, type: 3}
-      propertyPath: recoverTime
-      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fe92f5d1296d924c892709264e7c4e8, type: 3}
