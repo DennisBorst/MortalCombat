@@ -178,14 +178,13 @@ namespace MortalCombat
                 ShieldActive(false);
             }
 
-            if (shieldUp) 
-                return;
-
             if (input.Down(m_ControllerID, "Punch") && m_CanPunch)
             {
                 m_CanPunch = false;
                 m_MeleeParticle.SetActive(true);
                 AnimState(3, true);
+
+                ShieldActive(false);
             }
 
             if (input.Down(m_ControllerID, "Throw") && m_CanShoot)
@@ -194,6 +193,8 @@ namespace MortalCombat
                 GameObject projectile = Instantiate(m_Projectile, m_FirePoint.position, m_FirePoint.rotation);
                 projectile.GetComponent<Projectile>().m_CharacterID = GetComponent<CharacterID>();
                 GlobalEvents.SendMessage(new PlayerBulletMessage(m_ControllerID, m_CanShoot));
+
+                ShieldActive(false);
             }
         }
 
