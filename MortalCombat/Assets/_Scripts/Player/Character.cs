@@ -6,7 +6,7 @@
         Red,
         Dexter,
         Coda,
-        Mies,
+        Missy,
         Smurf,
 
         Extra1,

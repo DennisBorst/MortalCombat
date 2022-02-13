@@ -30,7 +30,7 @@ namespace MortalCombat
         
         [SerializeField, FormerlySerializedAs("text")] TMPro.TMP_Text _Text;
 
-        private Sprite[] _Sprites;
+        private CharacterConfiguration[] _Characters;
 
         [Dependency] PlayerStatsService _PlayerStats;
         [Dependency] InputService _Input;
@@ -43,8 +43,7 @@ namespace MortalCombat
         protected override void Awake()
         {
             base.Awake();
-            _Sprites = _CharacterManager.GetAllCharacters().Select(x => x.CharacterSelectSprite).ToArray();
-
+            _Characters = _CharacterManager.GetAllCharacters();
         }
 
         public void Start()
@@ -69,6 +68,7 @@ namespace MortalCombat
                 {
                     _MainAnimator.SetTrigger("ready");
                     Audio.Play(_AudioReady);
+                    Audio.Play(_Characters[currentIndex].CharacterAnnoucerAudioId);
 
                     ready = true;
                     PlayerConfiguration.Instance.SetSelectedIndex(_PlayerId, currentIndex);
@@ -129,14 +129,14 @@ namespace MortalCombat
 
         private Sprite GetCharacterSprite(int i)
         {
-            return _Sprites[WrapSpriteIndex(i)];
+            return _Characters[WrapSpriteIndex(i)].CharacterSelectSprite;
         }
 
         private int WrapSpriteIndex(int index)
         {
             if (index >= 0)
-                return index % _Sprites.Length;
-            else return _Sprites.Length - ((-index) % _Sprites.Length);
+                return index % _Characters.Length;
+            else return _Characters.Length - ((-index) % _Characters.Length);
         }
 
         public void GoToPreviousScene()
