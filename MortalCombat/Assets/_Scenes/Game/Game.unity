@@ -2481,10 +2481,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShieldHit
       objectReference: {fileID: 0}
-    - target: {fileID: 5708417766388587969, guid: 41be40620a587a34190093f22b1f4c8a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8689721777511539384, guid: 41be40620a587a34190093f22b1f4c8a, type: 3}
       propertyPath: m_RootOrder
       value: 5

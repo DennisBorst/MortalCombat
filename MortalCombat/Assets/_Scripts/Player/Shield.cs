@@ -23,8 +23,8 @@ namespace MortalCombat
             {
                 if (collision.gameObject.GetComponent<Projectile>().m_CharacterID.m_PlayerID == m_CharacterID.m_PlayerID) { return; }
 
-                Instantiate(shieldBreakParticle, transform.position, collision.transform.rotation);
-                //Instantiate(hitParticle, transform.position, Quaternion.identity);
+                //Instantiate(shieldBreakParticle, transform.position, collision.transform.rotation);
+                Instantiate(hitParticle, transform.position, Quaternion.identity);
                 _characterMovement.ShieldActive(false);
                 Destroy(collision.gameObject);
             }
