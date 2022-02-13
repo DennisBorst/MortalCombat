@@ -10,11 +10,13 @@ namespace MortalCombat
         [SerializeField] private GameObject _Skin = null;
         [SerializeField] private Sprite _PlayerIconSprite = null;
         [SerializeField] private Sprite _CharacterSelectSprite = null;
+        [SerializeField] private string _CharacterAnnoucerAudioId = "";
 
         public Character Character => _Character;
         public GameObject Skin => _Skin;
         public Sprite CharacterSelectSprite => _CharacterSelectSprite;
         public Sprite PlayerIconSprite => _PlayerIconSprite;
+        public string CharacterAnnoucerAudioId => _CharacterAnnoucerAudioId;
 
         Character IIdentifiable<Character>.Id => Character;
     }
