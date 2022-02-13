@@ -12,4 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ffd99bc95d9a47478828e293fead334, type: 3}
   m_Name: Announcer
   m_EditorClassIdentifier: 
-  _AudioAssetIdentifierMappings: []
+  _AudioAssetIdentifierMappings:
+  - _Identifier: Announcer/CharacterBlue
+    _AudioAsset: {fileID: 11400000, guid: 4e8336c66aad7fc4e936866d9802d534, type: 2}
+  - _Identifier: Announcer/CharacterCoda
+    _AudioAsset: {fileID: 11400000, guid: 7d53fc7603b30a845a2136000caba051, type: 2}
+  - _Identifier: Announcer/CharacterDexter
+    _AudioAsset: {fileID: 11400000, guid: e9622b2d812d38e43a8c8e7d9a44e95e, type: 2}
+  - _Identifier: Announcer/CharacterMissy
+    _AudioAsset: {fileID: 11400000, guid: 0fe240b5d702ca04f912a42df8d75d95, type: 2}
+  - _Identifier: Announcer/CharacterRed
+    _AudioAsset: {fileID: 11400000, guid: ac0f9813d32e5d642ad6dd36edf1442a, type: 2}
+  - _Identifier: Announcer/CharacterSmurf
+    _AudioAsset: {fileID: 11400000, guid: 950371e2e8e36394d9642b418c5badfc, type: 2}
+  - _Identifier: Announcer/CharacterSparky
+    _AudioAsset: {fileID: 11400000, guid: 84683d770323b804cb24a1906c91c448, type: 2}
