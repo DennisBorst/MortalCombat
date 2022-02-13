@@ -6,7 +6,6 @@ namespace ToolBox.Input
     {
         private const float XBOX_DEADZONE = 0.2f;
         
-        
         public static InputBinding[] bindings = new[]
         {
             // ** PLAYER 1 **

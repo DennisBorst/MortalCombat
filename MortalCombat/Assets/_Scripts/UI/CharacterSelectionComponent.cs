@@ -4,11 +4,15 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using ToolBox.Injection;
 using ToolBox.Input;
+using Siren;
 
 namespace MortalCombat
 {
     public class CharacterSelectionComponent : DependencyBehavior
     {
+        [SerializeField] private string AudioReady = "Menu/Confirm";
+        [SerializeField] private string AudioCancel = "Menu/Cancel";
+
         [SerializeField] private int playerId = 0;
         [SerializeField] Sprite[] sprites = null;
 
@@ -58,6 +62,7 @@ namespace MortalCombat
                 if (input.Down(playerId, "Confirm"))
                 {
                     mainAnimator.SetTrigger("ready");
+                    Audio.Play(AudioReady);
 
                     ready = true;
                     PlayerConfiguration.Instance.SetSelectedIndex(playerId, currentIndex);
@@ -65,6 +70,7 @@ namespace MortalCombat
 
                 if (input.Down(playerId, "Back"))
                 {
+                    Audio.Play(AudioCancel);
                     GoToPreviousScene();
                 }
             }
@@ -78,6 +84,8 @@ namespace MortalCombat
                     if (sentReady)
                         GlobalEvents.SendMessage(new PlayerUnready(playerId));
                     sentReady = false;
+
+                    Audio.Play(AudioCancel);
                 }
             }
         }
@@ -92,6 +100,7 @@ namespace MortalCombat
         {
             currentIndex = WrapSpriteIndex(currentIndex - 1);
             SetSprites();
+            Audio.Play("Menu/CharacterShift");
             faceAnimator.SetTrigger("next");
             arrowRight.SetTrigger("Start");
         }
@@ -100,6 +109,7 @@ namespace MortalCombat
         {
             currentIndex = WrapSpriteIndex(currentIndex + 1);
             SetSprites();
+            Audio.Play("Menu/CharacterShift");
             faceAnimator.SetTrigger("previous");
             arrowLeft.SetTrigger("Start");
         }
@@ -120,7 +130,7 @@ namespace MortalCombat
         {
             if (index >= 0)
                 return index % sprites.Length;
-            else return (sprites.Length - 1) - ((-index) % sprites.Length);
+            else return sprites.Length - ((-index) % sprites.Length);
         }
 
         public void GoToPreviousScene()
