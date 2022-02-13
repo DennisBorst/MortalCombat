@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96320570083e9b042adb67437661b2e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shieldBreakParticle: {fileID: 5708417766388587969, guid: 41be40620a587a34190093f22b1f4c8a, type: 3}
   hitParticle: {fileID: 3462761218687308064, guid: 193e52781d978f5489f67cab75d0b67f, type: 3}
   _characterMovement: {fileID: 0}
 --- !u!61 &6497118542702817860
