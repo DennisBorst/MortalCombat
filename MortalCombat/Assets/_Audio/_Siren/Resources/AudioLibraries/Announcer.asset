@@ -27,3 +27,17 @@ MonoBehaviour:
     _AudioAsset: {fileID: 11400000, guid: 950371e2e8e36394d9642b418c5badfc, type: 2}
   - _Identifier: Announcer/CharacterSparky
     _AudioAsset: {fileID: 11400000, guid: 84683d770323b804cb24a1906c91c448, type: 2}
+  - _Identifier: Announcer/BrawlFighterFurries
+    _AudioAsset: {fileID: 11400000, guid: 8a4de17a8fe045b4b8b7a0b88ef96084, type: 2}
+  - _Identifier: Announcer/GameAreYouReady
+    _AudioAsset: {fileID: 11400000, guid: c77e7ca465d835c4091dfe0e9881579d, type: 2}
+  - _Identifier: Announcer/GameThree
+    _AudioAsset: {fileID: 11400000, guid: e14bee74e93eb364b8cd834ccd4f8c65, type: 2}
+  - _Identifier: Announcer/GameTwo
+    _AudioAsset: {fileID: 11400000, guid: 30095258538170c4cb4bf977b7c1112d, type: 2}
+  - _Identifier: Announcer/GameOne
+    _AudioAsset: {fileID: 11400000, guid: ea6a09e05e72eb04aaff1375cd33ded6, type: 2}
+  - _Identifier: Announcer/GameGo
+    _AudioAsset: {fileID: 11400000, guid: 594292b8ca58a3643b83251b7065169e, type: 2}
+  - _Identifier: Announcer/SelectYourFighter
+    _AudioAsset: {fileID: 11400000, guid: b8739dfda75cc4040805b395c4c807ca, type: 2}
