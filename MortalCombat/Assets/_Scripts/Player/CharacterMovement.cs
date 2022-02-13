@@ -32,7 +32,7 @@ namespace MortalCombat
         [SerializeField] private Transform m_FirePoint;
         [SerializeField] private GameObject m_MeleeParticle;
 
-        [Dependency] private InputService input;
+        [Dependency] public InputService input;
 
         const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
         private bool m_Grounded;            // Whether or not the player is grounded.
@@ -48,7 +48,7 @@ namespace MortalCombat
         [System.Serializable]
         public class BoolEvent : UnityEvent<bool> { }
 
-        private int m_ControllerID;
+        [HideInInspector] public int m_ControllerID;
         private int jumpCounter;
         private float m_hInput;
         private float m_CurrentShootCooldown;
