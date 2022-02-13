@@ -113,10 +113,14 @@ namespace MortalCombat
             {
                 if (colliders[i].gameObject != gameObject)
                 {
-                    m_Grounded = true;
-                    jumpCounter = 0;
+                    if(m_rb.velocity.y < 0.5f)
+                    {
+                        m_Grounded = true;
+                        jumpCounter = 0;
+                    }
                     if(m_rb.velocity.y > 10)
-                        jumpCounter = 1; 
+                        jumpCounter = 1;
+
                     if (!wasGrounded)
                         OnLandEvent.Invoke();
                 }
