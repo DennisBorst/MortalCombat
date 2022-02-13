@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: CharacterMissy
   m_EditorClassIdentifier: 
   _AudioMixerGroup: {fileID: 0}
-  _AudioClips: []
+  _AudioClips:
+  - {fileID: 8300000, guid: f9edd66e0ef595d40a049b7380f8a63d, type: 3}
   _Volume: 1
   _Pan: 0
   _Doppler: 0
-  _SpatialBlend: 1
+  _SpatialBlend: 0
   _Looped: 0
   _RandomStartPosition: 0
   _MaxDistance: 500

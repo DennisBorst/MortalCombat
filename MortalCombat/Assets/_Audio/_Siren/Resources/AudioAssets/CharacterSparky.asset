@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: CharacterSparky
   m_EditorClassIdentifier: 
   _AudioMixerGroup: {fileID: 0}
-  _AudioClips: []
+  _AudioClips:
+  - {fileID: 8300000, guid: 3f33cd08f7b989f4b85bd7aa040c5d55, type: 3}
   _Volume: 1
   _Pan: 0
   _Doppler: 0
-  _SpatialBlend: 1
+  _SpatialBlend: 0
   _Looped: 0
   _RandomStartPosition: 0
   _MaxDistance: 500
