@@ -68,7 +68,7 @@ namespace Siren
 					break;
 	        }
 
-			AudioLog.Assert(asset, $"{audioEvent.Identifier} could not be found in any audio library.");
+			AudioLog.AssertWarning(asset, $"{audioEvent.Identifier} could not be found in any audio library.");
 			return asset;
         }
 

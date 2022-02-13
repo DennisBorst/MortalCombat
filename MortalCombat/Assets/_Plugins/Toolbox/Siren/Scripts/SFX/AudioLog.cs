@@ -14,6 +14,13 @@ namespace Siren
 		public static void Error(string msg) => Debug.LogError($"{TAG} {msg}");
 		public static void Assertion(string msg) => Debug.LogAssertion($"{TAG} {msg}");
 
+		public static void AssertWarning(bool expr) => AssertWarning(expr, ASSERT_FAIL_MSG);
+		public static void AssertWarning(bool expr, string msg)
+		{
+			if (!expr)
+				Warning(msg);
+		}
+
 		public static void Assert(bool expr) => Assert(expr, ASSERT_FAIL_MSG);
 		public static void Assert(bool expr, string msg)
 		{
