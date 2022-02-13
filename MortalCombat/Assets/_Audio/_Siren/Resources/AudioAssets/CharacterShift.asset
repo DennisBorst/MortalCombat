@@ -18,7 +18,7 @@ MonoBehaviour:
   _Volume: 0.5
   _Pan: 0
   _Doppler: 0
-  _SpatialBlend: 1
+  _SpatialBlend: 0
   _Looped: 0
   _RandomStartPosition: 0
   _MaxDistance: 500

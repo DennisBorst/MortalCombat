@@ -16,3 +16,4 @@ MonoBehaviour:
   _Skin: {fileID: 5075196268775072624, guid: 93a1e715ccd2f634da48b38f87ee5237, type: 3}
   _PlayerIconSprite: {fileID: 21300000, guid: 10d3708cdaaf1f244823b0648ec4491a, type: 3}
   _CharacterSelectSprite: {fileID: 21300000, guid: d1156d51db16f124f9267b819517a3dc, type: 3}
+  _CharacterAnnoucerAudioId: Announcer/CharacterRed

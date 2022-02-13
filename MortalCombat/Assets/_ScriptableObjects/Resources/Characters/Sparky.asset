@@ -16,3 +16,4 @@ MonoBehaviour:
   _Skin: {fileID: 5075196268775072624, guid: 9348ce3055626f541b81325e998be1d8, type: 3}
   _PlayerIconSprite: {fileID: 21300000, guid: f41d9f5a29852864b82aa5590b807560, type: 3}
   _CharacterSelectSprite: {fileID: 21300000, guid: f41d9f5a29852864b82aa5590b807560, type: 3}
+  _CharacterAnnoucerAudioId: Announcer/CharacterSparky
