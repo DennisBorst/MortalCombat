@@ -65,9 +65,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68208586abf20ee46b8caadf2fa775dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_JumpForce: 15
-  m_DoubleJumpForce: 10
+  m_JumpForce: 14
+  m_DoubleJumpForce: 12
   m_CrouchSpeed: 0.36
+  movementSpeed: 7.5
   m_MovementSmoothing: 0.05
   m_AirControl: 1
   m_ShootCooldown: 0.7
@@ -84,9 +85,11 @@ MonoBehaviour:
   m_Shield: {fileID: 4528975339063071645}
   m_FirePoint: {fileID: 7816837410655422381}
   m_MeleeParticle: {fileID: 8244991551697934964}
+  input: {fileID: 0}
   OnLandEvent:
     m_PersistentCalls:
       m_Calls: []
+  m_ControllerID: 0
   m_InputAvaible: 0
   m_FlipCharacterOnStart: 0
 --- !u!114 &6623008891668711587
@@ -264,9 +267,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 4598528201690325257}
     m_Modifications:
     - target: {fileID: 1101628852007192500, guid: 2f8e777c82e29c64bbfeeeff6b10af3a, type: 3}
+      propertyPath: hitParticle
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1101628852007192500, guid: 2f8e777c82e29c64bbfeeeff6b10af3a, type: 3}
       propertyPath: _characterMovement
       value: 
-      objectReference: {fileID: 4598528201690325253}
+      objectReference: {fileID: 0}
+    - target: {fileID: 1101628852007192500, guid: 2f8e777c82e29c64bbfeeeff6b10af3a, type: 3}
+      propertyPath: shieldBreakParticle
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1196878196405511290, guid: 2f8e777c82e29c64bbfeeeff6b10af3a, type: 3}
       propertyPath: m_RootOrder
       value: 0
