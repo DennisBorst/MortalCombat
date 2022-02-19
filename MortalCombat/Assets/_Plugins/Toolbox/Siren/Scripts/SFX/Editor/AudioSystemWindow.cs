@@ -35,7 +35,8 @@ namespace Siren.Editor
 
 		public void OnFocus()
 		{
-			_AudioLibraryList.OnFocusAndEnable();
+			if (_AudioLibraryList != null)
+				_AudioLibraryList.OnFocusAndEnable();
 		}
 
 		private void OnEnable()
