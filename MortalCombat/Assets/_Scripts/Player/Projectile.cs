@@ -37,7 +37,8 @@ namespace MortalCombat
                 CharacterHealth health = collision.gameObject.GetComponent<CharacterHealth>();
                 CharacterMovement characterMovement = collision.gameObject.GetComponent<CharacterMovement>();
                 Instantiate(hitEnemyParticle, collision.gameObject.transform.position, Quaternion.identity);
-                Camera.main.transform.DOShakePosition(.4f, .5f, 20, 90, false, true);
+                // TODO: Implement camera shake
+                //Camera.main.transform.DOShakePosition(.4f, .5f, 20, 90, false, true);
 
                 if (!characterMovement.invincible)
                 {

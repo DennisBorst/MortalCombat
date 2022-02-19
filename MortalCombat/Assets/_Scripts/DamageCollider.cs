@@ -1,6 +1,3 @@
-using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace MortalCombat
@@ -31,7 +28,8 @@ namespace MortalCombat
                 CharacterHealth health = collision.gameObject.GetComponent<CharacterHealth>();
                 CharacterMovement characterMovement = collision.gameObject.GetComponent<CharacterMovement>();
                 Instantiate(hitParticle, collision.gameObject.transform.position, Quaternion.identity);
-                Camera.main.transform.DOShakePosition(.4f, .5f, 20, 90, false, true);
+                // TODO: Implement camera shake
+                //Camera.main.transform.DOShakePosition(.4f, .5f, 20, 90, false, true);
 
                 if (!characterMovement.invincible)
                 {
