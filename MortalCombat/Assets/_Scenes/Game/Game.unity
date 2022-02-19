@@ -575,21 +575,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69dca5bda2b249c4c9fcf30e4faa83c1, type: 3}
+  m_Script: {fileID: 11500000, guid: d3d4a62a0b38f08499e187ade1e1cd4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Players:
-  - {fileID: 1838713445}
-  - {fileID: 230591909}
-  m_Offset: {x: 0, y: 3, z: -10}
-  m_SmoothTime: 0
-  minX: -1
-  maxX: 1
-  minY: -0.3
-  maxY: 1.8
-  m_MinZoom: 9
-  m_MaxZoom: 8
-  m_ZoomLimiter: 20
+  _ObjectsToFollow:
+  - {fileID: 702965994}
+  - {fileID: 1158651993}
+  _MinimumSize: 5
+  _MaximumSize: 15
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -902,6 +895,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &702965994 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4598528201690325256, guid: 7fe92f5d1296d924c892709264e7c4e8, type: 3}
+  m_PrefabInstance: {fileID: 4598528203089685356}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &772785919 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1152947068035480857, guid: 706f395419b31504783fca77c30b22f9, type: 3}
@@ -1304,6 +1302,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1158651993 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4598528201690325256, guid: 7fe92f5d1296d924c892709264e7c4e8, type: 3}
+  m_PrefabInstance: {fileID: 230591908}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1165133046 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7512019228505455764, guid: 88a0c5c7ce8697049afcd62e62eb3b98, type: 3}

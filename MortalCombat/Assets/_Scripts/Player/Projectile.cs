@@ -5,7 +5,6 @@ using DG.Tweening;
 
 namespace MortalCombat
 {
-
     public class Projectile : MonoBehaviour
     {
         [SerializeField] private float m_Damage;
