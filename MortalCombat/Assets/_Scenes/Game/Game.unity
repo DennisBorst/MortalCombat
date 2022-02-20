@@ -581,8 +581,8 @@ MonoBehaviour:
   _ObjectsToFollow:
   - {fileID: 702965994}
   - {fileID: 1158651993}
-  _MinimumSize: 5
-  _MaximumSize: 15
+  _MinimumSize: 7
+  _MaximumSize: 10
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
