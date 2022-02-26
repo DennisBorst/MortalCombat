@@ -4,7 +4,7 @@ using System.Text;
 
 namespace UnityEngine.CameraSystem
 {
-    [DefaultExecutionOrder(-1000)]
+    [DefaultExecutionOrder(-1000), DisallowMultipleComponent]
     public class ArenaCamera2D : MonoBehaviour
     {
         Camera camera;
@@ -18,48 +18,72 @@ namespace UnityEngine.CameraSystem
             DEB_currentSize,
             DEB_targetSize,
             DEB_marginX,
-            DEB_marginY;
-
+            DEB_marginY,
+            DEB_XDiff,
+            Deb_YDiff;
 
         private Rect FollowObjectBounds => RendererUtils.Get2DBoundingRect(_ObjectsToFollow);
+
+        [SerializeField] BoundsRestriction _BoundsRestriction = null;
 
         void Start()
         {
             camera = GetComponent<Camera>();
+            _BoundsRestriction = GetComponent<BoundsRestriction>();
         }
 
         void Update()
         {
+            // Get current zoom target
             Rect cameraRect = camera.Get2DCameraRect();
             Rect objectBounds = FollowObjectBounds;
 
+            float zoomTarget = GetTargetZoom(cameraRect, objectBounds, _BoundsRestriction);
 
+            // get current position target
+            Vector2 position = GetTargetPositionClamped(_BoundsRestriction, CameraUtils.GetOrtographicSizeVec2D(zoomTarget, camera.aspect));
+
+
+            // update positions
+            UpdateCameraZoom(cameraRect, objectBounds, zoomTarget);
+            UpdateCameraPosition(cameraRect, position);
+        }
+
+        private Vector2 GetTargetPositionClamped(BoundsRestriction boundsRestriction, Vector2 targetSize)
+        {
+            Vector2 targetPosition = GetTargetPosition();
+
+            if (!boundsRestriction)
+                return targetPosition;
+
+            Rect bounds = boundsRestriction.Bounds;
+            Rect rect = new Rect(targetPosition - (targetSize * 0.5f), targetSize);
+
+            float xDiff = 0, yDiff = 0;
+
+            xDiff = Mathf.Max(0, bounds.xMin - rect.xMin) + Mathf.Min(0, bounds.xMax - rect.xMax);
+            yDiff = Mathf.Max(0, bounds.yMin - rect.yMin) + Mathf.Min(0, bounds.yMax - rect.yMax);
+
+            DEB_XDiff = xDiff;
+            Deb_YDiff = yDiff;
+            return targetPosition + new Vector2(xDiff, yDiff);
+        }
+
+        private Vector2 GetTargetPosition()
+        {
             Vector2 position = Vector2.zero;
             foreach (var item in _ObjectsToFollow)
             {
                 position += (Vector2)item.transform.position;
             }
             position /= _ObjectsToFollow.Count;
+            return position;
+        }
 
-
-            Vector2 positionDifference = position - cameraRect.center;
-            Vector2 positionTranslation = positionDifference * Time.deltaTime * 10;
-
-            // cap at end location
-            if (positionTranslation.sqrMagnitude > positionDifference.sqrMagnitude)
-                positionTranslation = positionDifference;
-
-            transform.Translate(positionTranslation);
-
-
-
-            // Zooming 
-            float target = GetTargetSize(cameraRect.size, objectBounds.size, Vector2.one * 2);
-
-            target = Mathf.Clamp(target, _MinimumSize, _MaximumSize);
-
+        private void UpdateCameraZoom(Rect cameraRect, Rect objectBounds, float newSizeTarget)
+        {
             float size = camera.orthographicSize;
-            float difference = target - size;
+            float difference = newSizeTarget - size;
 
             float zoomSpeed;
             if (difference < 0)
@@ -95,8 +119,28 @@ namespace UnityEngine.CameraSystem
             camera.orthographicSize = size + smoothedValue;
         }
 
+        private float GetTargetZoom(Rect cameraRect, Rect objectBounds, BoundsRestriction boundsRestriction)
+        {
+            // Zooming 
+            float target = GetTargetSize(cameraRect.size, objectBounds.size, boundsRestriction, Vector2.one * 2);
 
-        private float GetTargetSize(Vector2 current, Vector2 target, Vector2 margin)
+            target = Mathf.Clamp(target, _MinimumSize, _MaximumSize);
+            return target;
+        }
+
+        private void UpdateCameraPosition(Rect cameraRect, Vector2 targetPosition)
+        {
+            Vector2 positionDifference = targetPosition - cameraRect.center;
+            Vector2 positionTranslation = positionDifference * Time.deltaTime * 5;
+
+            // cap at end location
+            if (positionTranslation.sqrMagnitude > positionDifference.sqrMagnitude)
+                positionTranslation = positionDifference;
+
+            transform.Translate(positionTranslation);
+        }
+
+        private float GetTargetSize(Vector2 current, Vector2 target, BoundsRestriction boundsRestriction, Vector2 margin)
         {
             margin *= (target.magnitude / 8);
             margin.Set(margin.x * GetAspect(current), margin.y);
@@ -106,9 +150,18 @@ namespace UnityEngine.CameraSystem
 
             target += margin;
 
-
             float byHeight = target.x * current.y / current.x * 0.5f;
             float byWidth = current.x * target.y / current.x * 0.5f;
+            
+            if (boundsRestriction)
+            {
+                Vector2 max = boundsRestriction.Bounds.size;
+                float byMaxHeight = max.x * current.y / current.x * 0.5f;
+                float byMaxWidth = current.x * max.y / current.x * 0.5f;
+                return Mathf.Min(Mathf.Max(byHeight, byWidth) ,
+                                 Mathf.Min(byMaxHeight, byMaxWidth));
+            }
+
             return Mathf.Max(byHeight, byWidth);
         }
 
@@ -137,6 +190,10 @@ namespace UnityEngine.CameraSystem
             label.Append("TargetSzie: ").AppendLine(DEB_targetSize.ToString());
             label.Append("Applied margin x: ").AppendLine(DEB_marginX.ToString());
             label.Append("Applied margin y: ").AppendLine(DEB_marginY.ToString());
+            label.AppendLine();
+            label.Append("Max bounds diff x: ").AppendLine(DEB_XDiff.ToString());
+            label.Append("Max bounds diff Y: ").AppendLine(Deb_YDiff.ToString());
+
 
 
 
