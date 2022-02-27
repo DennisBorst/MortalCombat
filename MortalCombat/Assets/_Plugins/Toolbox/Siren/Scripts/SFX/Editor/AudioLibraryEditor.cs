@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 
 using System;
+using ToolBox;
 
 namespace Siren.Editor
 {
@@ -17,7 +18,10 @@ namespace Siren.Editor
         public event Action<AudioAsset> OnPreview;
         public event Action OnRequestRepaint;
 
-		private EditorWindow _currentWindow;
+        public event Action<AudioAsset> OnElementDeleted;
+
+
+        private EditorWindow _currentWindow;
 		private AudioAssetLibrary _RawTarget;
         private SerializedObject _SerializedTarget;
         private SerializedProperty _MappingList;
@@ -70,7 +74,6 @@ namespace Siren.Editor
 	        GUILayout.BeginHorizontal();
 
 	        GUILayout.Label("Audio Asset Mappings");
-
 
 			if (GUILayout.Button("Nuke"))
 	        {
@@ -169,13 +172,19 @@ namespace Siren.Editor
                 return;
             }
 
+            var asset = (AudioAsset)_MappingList.GetArrayElementAtIndex(index).objectReferenceValue;
             _MappingList.DeleteArrayElementAtIndex(index);
+            OnElementDeleted?.Invoke(asset);
         }
 
         private void DeleteAllElements()
         {
+            AudioAsset[] assetsToDelete = _MappingList.ToArray<AudioAsset>();
+
             _MappingList.ClearArray();
             _SerializedTarget.ApplyModifiedProperties();
+
+            assetsToDelete.Each(OnElementDeleted);
         }
 
         private void OnAudioAssetSelected(int index)

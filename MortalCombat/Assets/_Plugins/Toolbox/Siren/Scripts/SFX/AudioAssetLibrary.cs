@@ -20,5 +20,13 @@ namespace Siren
         {
             return _AudioAssetIdentifierMappings.ResolveOrDefault(identifier)?.AudioAsset;
         }
+
+        /// <summary>
+        /// Returns wether the audio asset is referenced in this library
+        /// </summary>
+        public bool ReferencesAudioAsset(AudioAsset asset)
+        {
+            return _AudioAssetIdentifierMappings.Any(x => x.AudioAsset == asset);
+        }
     }
 }

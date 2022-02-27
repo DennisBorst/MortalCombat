@@ -1,7 +1,9 @@
 #if UNITY_EDITOR
-using Siren.Utilities.Editor;
+using ToolBox.Editor;
 using UnityEditor;
 using UnityEngine;
+
+using EditorScriptUtil = Siren.Utilities.Editor.EditorScriptUtil;
 
 namespace Siren.Editor
 {
@@ -25,7 +27,6 @@ namespace Siren.Editor
 		private AudioAssetEditor _AudioAssetEditor;
 
 		private readonly AudioPreviewer _AudioPreviewer = new AudioPreviewer();
-
 
 		private void Awake()
 		{
@@ -52,6 +53,11 @@ namespace Siren.Editor
 			_AudioLibraryEditor.OnPreview += _AudioPreviewer.Play;
 			_AudioLibraryEditor.OnRequestRepaint += Repaint;
 			_AudioLibraryList.OnRequestRepaint += Repaint;
+
+			_AudioLibraryEditor.OnElementDeleted += (asset) => {
+				if (!_AudioLibraryList.HasAnyReferenceTo(asset))
+					AssetUtil.Remove(asset);
+			};
 		}
 
 		private void OnDisable()

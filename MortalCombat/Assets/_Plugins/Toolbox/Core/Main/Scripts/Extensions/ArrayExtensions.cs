@@ -6,9 +6,17 @@ namespace ToolBox
 {
     public static class ArrayExtensions
     {
-        public static bool NullOrNoElements<T>(this T[] src)
+        public static bool IsNullOrEmpty<T>(this T[] src)
         {
             return src == null || src.Length == 0;
+        }
+
+        public static bool Any<T>(this T[] src, Func<T, bool> predicate)
+        {
+            for (int i = 0; i < src.Length; i++)
+                if (predicate.Invoke(src[i]))
+                    return true;
+            return false;
         }
 
         public static T[] Fill<T>(this T[] src, T value)

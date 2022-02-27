@@ -3,6 +3,7 @@ using Siren.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
 using ToolBox.Editor;
+using ToolBox;
 
 namespace Siren.Editor
 {
@@ -55,6 +56,11 @@ namespace Siren.Editor
 		{
 			FetchResources();
 		}
+
+        internal bool HasAnyReferenceTo(AudioAsset asset)
+        {
+            return _Libraries.Any(x => x.ReferencesAudioAsset(asset));
+        }
 
 		private void OnSelect(int index)
         {

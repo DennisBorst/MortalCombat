@@ -10,6 +10,11 @@ namespace ToolBox.Editor
 	{
 		private const string EXTENSION = ".asset";
 
+		public static bool Remove<T>(T asset) where T : ScriptableObject
+        {
+			return AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(asset));
+        }
+
 		public static T Create<T>() where T : ScriptableObject
 		{
 			return (T)Create(typeof(T));

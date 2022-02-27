@@ -12,7 +12,7 @@ namespace ToolBox.Injection
         {
             var types = TypeHelper.GetAllTypesThatInherit<IBootstrapService>();
 
-            if (types.NullOrNoElements())
+            if (types.IsNullOrEmpty())
                 return;
             
             GlobalInjector.Injector.LoadTypes(types);

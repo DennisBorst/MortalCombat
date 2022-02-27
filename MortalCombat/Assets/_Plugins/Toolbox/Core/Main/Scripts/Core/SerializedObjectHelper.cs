@@ -1,5 +1,4 @@
 ﻿#if UNITY_EDITOR
-using System.Linq;
 using UnityEditor;
 
 namespace ToolBox
@@ -8,7 +7,7 @@ namespace ToolBox
     {
         public static SerializedProperty[] GetAllProperties(this SerializedObject obj)
         {
-            return TypeHelper.GetFieldNames(obj).Select(x => obj.FindProperty(x)).ToArray();
+            return TypeHelper.GetFieldNames(obj).Select(x => obj.FindProperty(x));
         }
     }
 }
