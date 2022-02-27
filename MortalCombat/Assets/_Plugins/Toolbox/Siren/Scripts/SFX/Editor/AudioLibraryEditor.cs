@@ -5,6 +5,9 @@ using UnityEngine;
 
 using System;
 using ToolBox;
+using ToolBox.Editor;
+
+using EditorScriptUtil = Siren.Utilities.Editor.EditorScriptUtil;
 
 namespace Siren.Editor
 {
@@ -172,8 +175,11 @@ namespace Siren.Editor
                 return;
             }
 
-            var asset = (AudioAsset)_MappingList.GetArrayElementAtIndex(index).objectReferenceValue;
+            var property = _MappingList.GetArrayElementAtIndex(index);
+            var relative = property.FindPropertyRelative("_AudioAsset");
+            var asset = (AudioAsset)relative.objectReferenceValue;
             _MappingList.DeleteArrayElementAtIndex(index);
+            _MappingList.serializedObject.ApplyModifiedProperties();
             OnElementDeleted?.Invoke(asset);
         }
 
