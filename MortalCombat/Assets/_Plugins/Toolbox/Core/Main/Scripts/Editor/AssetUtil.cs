@@ -41,6 +41,11 @@ namespace ToolBox.Editor
 			return CreateAt(path, type, type.Name);
 		}
 
+		public static string GetPath(ScriptableObject path)
+        {
+			return AssetDatabase.GetAssetPath(path);
+        }
+
 		private static ScriptableObject CreateAt(string path, Type type, string assetName)
 		{
 			CreateDirectoryPathIfapplicable(path);
@@ -70,6 +75,11 @@ namespace ToolBox.Editor
 		{
 			return AssetDatabase.FindAssets($"t:{typeof(T).Name.ToLower()}");
 		}
+
+		public static string[] GetAssetPaths<T>() where T : ScriptableObject
+        {
+			return GUIDSToAssetPaths(GetAssetGuids<T>());
+        }
 
 		public static string[] GUIDSToAssetPaths(string[] guids)
 		{

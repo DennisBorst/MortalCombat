@@ -132,6 +132,21 @@ namespace ToolBox
                 function.Invoke(src[i]);
         }
 
+        public static Tr[] Select<T, Tr>(this T[] src, Func<T, Tr> function)
+        {
+#if DEBUG
+            if (src == null)
+                throw new ArgumentException("src");
+
+            if (function == null)
+                throw new ArgumentException("function");
+#endif
+            Tr[] results = new Tr[src.Length];
+            for (int i = 0; i < src.Length; i++)
+                results[i] = function.Invoke(src[i]);
+            return results;
+        }
+
         public static void Each<T>(this T[][] src, Action<T> function)
         {
 #if DEBUG

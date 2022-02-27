@@ -18,9 +18,7 @@ namespace Siren.Editor
         private readonly SelectableList _SelectionList;
         private Vector2 _ScrollPosition = Vector2.zero;
 
-        private string[] _AssetGuids;
-        private string[] _AssetPaths;
-        private string[] _AssetLabels;
+        private AudioAssetLibrary[] _Libraries;
 
         public AudioLibraryList(EditorWindow windowInstance)
         {
@@ -49,7 +47,7 @@ namespace Siren.Editor
 
             GUILayout.EndHorizontal();
             _ScrollPosition = EditorGUILayout.BeginScrollView(_ScrollPosition);
-            _SelectionList.DoList(_AssetLabels.Length, _ScrollPosition);
+            _SelectionList.DoList(_Libraries.Length, _ScrollPosition);
             EditorGUILayout.EndScrollView();
         }
 
@@ -68,19 +66,17 @@ namespace Siren.Editor
 				return;
 			}
 
-            OnSelected?.Invoke(AssetDatabase.LoadAssetAtPath<AudioAssetLibrary>(_AssetPaths[index]));
+            OnSelected?.Invoke(_Libraries[index]);
         }
 
         private void DrawElement(int index)
         {
-            GUILayout.Label(_AssetLabels[index]);
+            GUILayout.Label(_Libraries[index].name);
         }
 
         private void FetchResources()
         {
-			_AssetGuids = AssetUtil.GetAssetGuids<AudioAssetLibrary>();
-			_AssetPaths = AssetUtil.GUIDSToAssetPaths(_AssetGuids);
-			_AssetLabels = AssetUtil.PathsToLabels(_AssetPaths);
+            _Libraries = AudioFileSystem.LoadAllLibraries();
         }
 
         private void OnNewElementcreated(AudioAssetLibrary element)
@@ -96,11 +92,10 @@ namespace Siren.Editor
             if (index == -1) // nothing selected delete
                 return;
 
-            string name = _AssetLabels[index];
             EditorWindow.CreateInstance<ConfirmActionPopup>()
-                .SetQuestion($"Are you sure you want to delete {name}?")
+                .SetQuestion($"Are you sure you want to delete {_Libraries[index].name}?")
 				.CenterOnRect(_CurrentWindow.position)
-                .OnConfirm += () => RemoveAsset(_AssetPaths[index]);
+                .OnConfirm += () => RemoveAsset(AssetUtil.GetPath(_Libraries[index]));
         }
 
 		private void RemoveAsset(string name)
