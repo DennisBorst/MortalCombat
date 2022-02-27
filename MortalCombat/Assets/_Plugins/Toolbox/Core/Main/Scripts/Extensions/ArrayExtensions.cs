@@ -217,6 +217,13 @@ namespace ToolBox
             throw new ArgumentOutOfRangeException($"{id.ToString()} could not be resolved.");
         }
 
+        public static T1 ResolveOrDefault<T1, T2>(this T1[] src, T2 id) where T1 : IIdentifiable<T2>
+        {
+            if (src.TryResolve(id, out T1 result))
+                return result;
+            return default(T1);
+        }
+
         public static bool TryFindFirst<T>(this T[] src, Func<T, bool> predicate, out T result)
         {
 #if DEBUG

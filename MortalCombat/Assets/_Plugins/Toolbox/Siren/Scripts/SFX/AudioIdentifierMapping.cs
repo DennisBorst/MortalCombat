@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using ToolBox;
 
 namespace Siren
 {
@@ -7,13 +8,13 @@ namespace Siren
     /// DataClass: Maps an indentifier to an audio asset
     /// </summary>
     [Serializable]
-    public class AudioIdentifierMapping
+    public class AudioIdentifierMapping : IIdentifiable<string>
     {
         [SerializeField] private string _Identifier = "id";
 		[SerializeField] private AudioAsset _AudioAsset = null;
         
         public string Identifier => _Identifier;
         public AudioAsset AudioAsset => _AudioAsset;
-
+        string IIdentifiable<string>.Id => _Identifier;
     }
 }

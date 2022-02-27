@@ -1,5 +1,6 @@
 using UnityEngine.Serialization;
 using UnityEngine;
+using ToolBox;
 
 namespace Siren
 {
@@ -17,14 +18,7 @@ namespace Siren
         /// <Returns> Audioasset or null on fail</Returns>
         public AudioAsset Resolve(string identifier)
         {
-            foreach (AudioIdentifierMapping mapping in _AudioAssetIdentifierMappings)
-            {
-                if (mapping.Identifier.Equals(identifier))
-                {
-                    return mapping.AudioAsset;
-                }
-            }
-			return null;
+            return _AudioAssetIdentifierMappings.ResolveOrDefault(identifier)?.AudioAsset;
         }
     }
 }
