@@ -8,6 +8,7 @@ using ToolBox;
 using ToolBox.Editor;
 
 using EditorScriptUtil = Siren.Utilities.Editor.EditorScriptUtil;
+using UnityEngine.Audio;
 
 namespace Siren.Editor
 {
@@ -30,7 +31,9 @@ namespace Siren.Editor
         private SerializedProperty _MappingList;
         private SerializedProperty _DefaultMixerChannel;
 
-        private readonly GUIContent label = new GUIContent("Default mixer group", "The default mixer group that this audio library will play through.");
+        private readonly GUIContent _MixerGroupLabel = new GUIContent("Default mixer group", "The default mixer group that this audio library will play through.");
+        private readonly GUIContent _AudioAssetLabel = new GUIContent("Audio Asset:", "The audio asset this mapping points to.");
+
 
 
         private Vector2 _ScrollVector;
@@ -70,7 +73,7 @@ namespace Siren.Editor
             GUILayout.Label($"{nameof(AudioLibraryEditor)}");
 
             EditorGUI.BeginChangeCheck();
-            EditorGUILayout.ObjectField(_DefaultMixerChannel, label);
+            EditorScriptUtil.DrawObjectField<AudioMixerGroup>(_DefaultMixerChannel, _MixerGroupLabel);
             if (EditorGUI.EndChangeCheck())
                 _SerializedTarget.ApplyModifiedProperties();
             GUILayout.EndHorizontal();
@@ -139,9 +142,10 @@ namespace Siren.Editor
             audioIdentifierProperty.stringValue = EditorGUILayout.TextField(audioIdentifierProperty.stringValue);
 
 			GUILayout.BeginHorizontal();
-			GUILayout.Label("Audio Asset: ");
-			audioAssetProperty.objectReferenceValue = EditorGUILayout.ObjectField(audioAssetProperty.objectReferenceValue, typeof(AudioAsset), false);
-			GUILayout.Space(2);
+
+            EditorScriptUtil.DrawObjectField<AudioAsset>(audioAssetProperty, new GUIContent("Audio Asset:"));
+
+            GUILayout.Space(2);
 			bool audioAssetContainsClips = referencedAudioAsset.ContainsAudioClips;
 			DrawPreviewButton(audioAssetContainsClips, index, new AudioAssetContext(_RawTarget, referencedAudioAsset));
 

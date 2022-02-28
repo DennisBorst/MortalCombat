@@ -44,7 +44,7 @@ namespace Siren.Utilities.Editor
 
 			T[] objects = null;
 
-			// I've got the inspiraion from
+			// I've got the inspiration from
 			// https://forum.unity.com/threads/working-with-draganddrop-for-a-custom-editor-window.94192/
 			EventType eventType = Event.current.type;
 
@@ -143,6 +143,19 @@ namespace Siren.Utilities.Editor
 			Handles.color = color;
 			Handles.DrawLine(p1, p2);
 			Handles.EndGUI();
+		}
+
+		public static void DrawObjectField<T>(SerializedProperty property, GUIContent label) where T : UnityEngine.Object
+        {
+			GUILayout.BeginHorizontal();
+			GUILayout.Label(label);
+
+			EditorGUI.BeginChangeCheck();
+			property.objectReferenceValue = EditorGUILayout.ObjectField(property.objectReferenceValue, typeof(T), false);
+
+			if (EditorGUI.EndChangeCheck())
+				property.serializedObject.ApplyModifiedProperties();
+			GUILayout.EndHorizontal();
 		}
 	}
 }
