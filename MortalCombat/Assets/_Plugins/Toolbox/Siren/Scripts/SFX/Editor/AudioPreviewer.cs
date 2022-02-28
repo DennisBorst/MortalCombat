@@ -36,9 +36,9 @@ namespace Siren.Editor
 			AssemblyReloadEvents.beforeAssemblyReload -= Remove;
 		}
 		
-		public void Play(AudioAsset audioAsset)
+		public void Play(AudioAssetContext assetContext)
 		{
-			AudioSysUtil.ConfigureAudioSource(_AudioSource, audioAsset);
+			AudioSysUtil.ConfigureAudioSource(_AudioSource, assetContext);
 			_AudioSource.Play();
 		}
 	}

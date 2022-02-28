@@ -2,10 +2,10 @@ using UnityEngine;
 
 namespace Siren
 {
-	/// <summary>
-	/// Wrapper around the object that plays a sound
-	/// </summary>
-	public class AudioChannel
+    /// <summary>
+    /// Wrapper around the object that plays a sound
+    /// </summary>
+    public class AudioChannel
 	{
 		private GameObject _GameObject;
 		private AudioSource _AudioSource;
@@ -43,7 +43,7 @@ namespace Siren
 			}
 		}
 
-		public void Play(AudioAsset asset, AudioEvent audioEvent)
+		public void Play(AudioAssetContext assetContext, AudioEvent audioEvent)
 		{
 			IsFree = false;
 
@@ -56,7 +56,7 @@ namespace Siren
 
 			_GameObject.SetActive(true);
 			Context = audioEvent.Context;
-			AudioSysUtil.ConfigureAudioSource(_AudioSource, asset);
+			AudioSysUtil.ConfigureAudioSource(_AudioSource, assetContext);
 			_AudioSource.Play();
 			_GameObject.name = $"Audio Channel {_ChannelNumber}: {audioEvent.Identifier}";
 		}

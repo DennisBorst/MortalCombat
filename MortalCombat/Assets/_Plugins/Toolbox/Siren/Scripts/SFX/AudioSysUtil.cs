@@ -10,8 +10,11 @@ namespace Siren
 		/// <summary>
 		/// Will configure an audio source according to the settings in an AudioAsset
 		/// </summary>
-		public static void ConfigureAudioSource(AudioSource audioSource, AudioAsset asset)
+		public static void ConfigureAudioSource(AudioSource audioSource, AudioAssetContext context)
 		{
+			var asset = context.audioAsset;
+			var library = context.sourceLibrary;
+
 			if (asset.AudioClips == null || asset.ClipCount == 0)
 			{
 				AudioLog.Warning($"tried playing asset {asset.name} but it has no clips.");
@@ -32,7 +35,7 @@ namespace Siren
 
 			audioSource.loop = asset.IsLooped;
 			audioSource.panStereo = asset.Pan;
-			audioSource.outputAudioMixerGroup = asset.AudioMixerGroup;
+			audioSource.outputAudioMixerGroup = context.GetAudioMixerGroup();
 			audioSource.pitch = pitch;
 			audioSource.clip = clip;
 			audioSource.volume = asset.Volume;

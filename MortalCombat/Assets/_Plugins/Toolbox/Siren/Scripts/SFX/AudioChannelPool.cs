@@ -25,11 +25,11 @@ namespace Siren
 			}
 		}
 
-		public void Play(AudioAsset asset, AudioEvent audioEvent)
+		public void Play(AudioAssetContext assetContext, AudioEvent audioEvent)
 		{
 			if (FindFreeChannel(out AudioChannel channel))
 			{
-				channel.Play(asset, audioEvent);
+				channel.Play(assetContext, audioEvent);
 			}
 			else
 			{

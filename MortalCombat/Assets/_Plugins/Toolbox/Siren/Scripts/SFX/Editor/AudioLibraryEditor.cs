@@ -18,7 +18,7 @@ namespace Siren.Editor
     {
         private readonly SelectableList _SelectableAudioAssetList;
         public event Action<AudioAsset> OnSelected;
-        public event Action<AudioAsset> OnPreview;
+        public event Action<AudioAssetContext> OnPreview;
         public event Action OnRequestRepaint;
 
         public event Action<AudioAsset> OnElementDeleted;
@@ -28,6 +28,10 @@ namespace Siren.Editor
 		private AudioAssetLibrary _RawTarget;
         private SerializedObject _SerializedTarget;
         private SerializedProperty _MappingList;
+        private SerializedProperty _DefaultMixerChannel;
+
+        private readonly GUIContent label = new GUIContent("Default mixer group", "The default mixer group that this audio library will play through.");
+
 
         private Vector2 _ScrollVector;
 
@@ -53,7 +57,8 @@ namespace Siren.Editor
 			_RawTarget = library;
 			_SerializedTarget = new SerializedObject(library);
 			_MappingList = _SerializedTarget.FindProperty("_AudioAssetIdentifierMappings");
-		}
+			_DefaultMixerChannel = _SerializedTarget.FindProperty("_AudioMixerGroup");
+        }
 
 		public void DoLibraryEditor()
         {
@@ -61,13 +66,22 @@ namespace Siren.Editor
             {
                 return;
             }
+            GUILayout.BeginHorizontal();
+            GUILayout.Label($"{nameof(AudioLibraryEditor)}");
+
+            EditorGUI.BeginChangeCheck();
+            EditorGUILayout.ObjectField(_DefaultMixerChannel, label);
+            if (EditorGUI.EndChangeCheck())
+                _SerializedTarget.ApplyModifiedProperties();
+            GUILayout.EndHorizontal();
+
+            Rect rect = GUILayoutUtility.GetRect(0, 1, GUILayout.ExpandWidth(true));
+            EditorScriptUtil.DrawLine(rect.GetPosition(0, 0), rect.GetPosition(1, 0), Color.black);
 
             _ScrollVector = GUILayout.BeginScrollView(_ScrollVector);
 
-            GUILayout.Label($"{nameof(AudioLibraryEditor)}");
             DrawAssetMappingList();
 
-			_SerializedTarget.ApplyModifiedProperties();
             GUILayout.EndScrollView();
         }
 
@@ -129,21 +143,21 @@ namespace Siren.Editor
 			audioAssetProperty.objectReferenceValue = EditorGUILayout.ObjectField(audioAssetProperty.objectReferenceValue, typeof(AudioAsset), false);
 			GUILayout.Space(2);
 			bool audioAssetContainsClips = referencedAudioAsset.ContainsAudioClips;
-			DrawPreviewButton(audioAssetContainsClips, index, referencedAudioAsset);
+			DrawPreviewButton(audioAssetContainsClips, index, new AudioAssetContext(_RawTarget, referencedAudioAsset));
 
             EditorGUILayout.EndHorizontal();
 			EditorGUILayout.EndVertical();
 
 		}
 
-		private void DrawPreviewButton(bool enabled, int index, AudioAsset audioAsset)
+		private void DrawPreviewButton(bool enabled, int index, AudioAssetContext assetContext)
         {
 			if (!enabled)
 				GUI.enabled = false;
 
 	        if (GUILayout.Button("Preview") || PreviewKeyPressed(index))
 	        {
-		        OnPreview?.Invoke(audioAsset);
+		        OnPreview?.Invoke(assetContext);
 	        }
 
 			if (!enabled)
@@ -179,7 +193,7 @@ namespace Siren.Editor
             var relative = property.FindPropertyRelative("_AudioAsset");
             var asset = (AudioAsset)relative.objectReferenceValue;
             _MappingList.DeleteArrayElementAtIndex(index);
-            _MappingList.serializedObject.ApplyModifiedProperties();
+_SerializedTarget.ApplyModifiedProperties();
             OnElementDeleted?.Invoke(asset);
         }
 

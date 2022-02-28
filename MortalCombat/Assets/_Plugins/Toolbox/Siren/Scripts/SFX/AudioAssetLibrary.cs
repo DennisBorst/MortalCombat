@@ -1,6 +1,7 @@
 using UnityEngine.Serialization;
 using UnityEngine;
 using ToolBox;
+using UnityEngine.Audio;
 
 namespace Siren
 {
@@ -9,16 +10,24 @@ namespace Siren
     /// </summary>
     public class AudioAssetLibrary : ScriptableObject
     {
+		[SerializeField] private AudioMixerGroup _AudioMixerGroup = null;
         [FormerlySerializedAs("AudioIndentifier")]
         [SerializeField] private AudioIdentifierMapping[] _AudioAssetIdentifierMappings = new AudioIdentifierMapping[0];
 
+        public AudioMixerGroup AudioMixerGroup => _AudioMixerGroup;
+
         /// <summary>
-        /// Resolves an indentifier to an audio asset.
+        /// Attempts to find an audio asset using the provided ID
         /// </summary>
-        /// <Returns> Audioasset or null on fail</Returns>
-        public AudioAsset Resolve(string identifier)
+        public bool TryResolve(string identifier, out AudioAssetContext assetContext)
         {
-            return _AudioAssetIdentifierMappings.ResolveOrDefault(identifier)?.AudioAsset;
+            if (_AudioAssetIdentifierMappings.TryResolve(identifier, out AudioIdentifierMapping value))
+            {
+                assetContext = new AudioAssetContext(this, value.AudioAsset);
+                return true;
+            }
+            assetContext = default(AudioAssetContext);
+            return false;
         }
 
         /// <summary>

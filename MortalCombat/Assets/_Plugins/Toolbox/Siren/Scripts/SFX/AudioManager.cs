@@ -43,33 +43,26 @@ namespace Siren
 
         private void HandlePlayEvent(AudioEvent audioEvent)
         {
-	        AudioAsset asset = ResolveAsset(audioEvent);
-
-			if (!asset)
-				return;
-
-			_AudioChannelPool.Play(asset,
-				audioEvent);
+            if (TryResolveAsset(audioEvent, out AudioAssetContext assetContext))
+                _AudioChannelPool.Play(assetContext, audioEvent);
         }
 
-        private AudioAsset ResolveAsset(AudioEvent audioEvent)
+        private bool TryResolveAsset(AudioEvent audioEvent, out AudioAssetContext assetContext)
         {
             if (string.IsNullOrEmpty(audioEvent.Identifier))
             {
                 AudioLog.Warning("Tried to resolve an audio asset with no identifier.");
-                return null;
+                assetContext = default(AudioAssetContext);
+                return false;
             }
 
-			AudioAsset asset = null;
-			for (int i = 0; i < _Libraries.Length; i++)
-	        {
-				asset = _Libraries[i].Resolve(audioEvent.Identifier);
-				if (asset)
-					break;
-	        }
+			for (int i = 0; i < _Libraries.Length; i++) 
+                if (_Libraries[i].TryResolve(audioEvent.Identifier, out assetContext)) 
+                    return true; 
 
-			AudioLog.AssertWarning(asset, $"{audioEvent.Identifier} could not be found in any audio library.");
-			return asset;
+			AudioLog.Warning($"{audioEvent.Identifier} could not be found in any audio library.");
+            assetContext = default(AudioAssetContext);
+            return false;
         }
 
         private void HandleStopEvent(AudioEvent audioEvent)
