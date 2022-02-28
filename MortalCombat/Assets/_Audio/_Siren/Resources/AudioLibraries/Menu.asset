@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ffd99bc95d9a47478828e293fead334, type: 3}
   m_Name: Menu
   m_EditorClassIdentifier: 
+  _AudioMixerGroup: {fileID: 24300002, guid: a5fa2cf726d36464d96b6da6a256b725, type: 2}
   _AudioAssetIdentifierMappings:
   - _Identifier: Menu/Confirm
     _AudioAsset: {fileID: 11400000, guid: 9a3f1c17655565548815f678bf60d719, type: 2}
